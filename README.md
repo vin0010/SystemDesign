@@ -37,18 +37,18 @@ Memory
 			- Reliability: If one of your database servers is destroyed by a natural disaster, such as a typhoon or an earthquake, data is still preserved. You do not need to worry about data loss because data is replicated across multiple locations. 
 			- High availability: By replicating data across different locations, your website remains in operation even if a database is offline as you can access data stored in another database server.
 		- If the master database goes offline, a slave database will be promoted to be the new master. All the database operations will be temporarily executed on the new master database. A new slave database will replace the old one for data replication immediately. In production systems, promoting a new master is more complicated as the data in a slave database might not be up to date. The missing data needs to be updated by running data recovery scripts.
-
+	- Sharding
 ## Cache
-	- A cache is a temporary storage area that stores the result of expensive responses or frequently accessed data in memory so that subsequent requests are served more quickly.
-	- The application performance is greatly affected by calling the database repeatedly. The cache can mitigate this problem.
-	- Here are a few considerations for using a cache system
-		- Decide when to use cache. Consider using cache when data is read frequently but modified infrequently.
-		- Expiration policy
-			- It is advisable not to make the expiration date too short as this will cause the system to reload data from the database too frequently. Meanwhile, it is advisable not to make the expiration date too long as the data can become stale.
-		- Consistency: This involves keeping the data store and the cache in sync. Inconsistency can happen because data-modifying operations on the data store and cache are not in a single transaction. When scaling across multiple regions, maintaining consistency between the data store and cache is challenging.
-		- Mitigating failures: A single cache server represents a potential single point of failure
-		- Another recommended approach is to overprovision the required memory by certain percentages.
-		- Eviction policies
+- A cache is a temporary storage area that stores the result of expensive responses or frequently accessed data in memory so that subsequent requests are served more quickly.
+- The application performance is greatly affected by calling the database repeatedly. The cache can mitigate this problem.
+- Here are a few considerations for using a cache system
+	- Decide when to use cache. Consider using cache when data is read frequently but modified infrequently.
+	- Expiration policy
+		- It is advisable not to make the expiration date too short as this will cause the system to reload data from the database too frequently. Meanwhile, it is advisable not to make the expiration date too long as the data can become stale.
+	- Consistency: This involves keeping the data store and the cache in sync. Inconsistency can happen because data-modifying operations on the data store and cache are not in a single transaction. When scaling across multiple regions, maintaining consistency between the data store and cache is challenging.
+	- Mitigating failures: A single cache server represents a potential single point of failure
+	- Another recommended approach is to overprovision the required memory by certain percentages.
+	- Eviction policies
 
 	- Stateless web tier by extracting user/session details to a data store
 ## CDN
