@@ -51,7 +51,8 @@ Memory
         - High cost
     - **Horizontal scaling / Sharding**
       - Horizontal scaling, also known as sharding, is the practice of adding more servers. Sharding separates large databases into smaller, more easily managed parts called shards. Each shard shares the same schema, though the actual data on each shard is unique to the shard.
-      - 
+      - <img width="594" alt="image" src="https://github.com/vin0010/SystemDesign/assets/10086767/27f0fe1f-7e53-45b7-918e-3a68ead928c7">
+
 
 ## Cache
 - A cache is a temporary storage area that stores the result of expensive responses or frequently accessed data in memory so that subsequent requests are served more quickly.
