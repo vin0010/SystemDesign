@@ -41,7 +41,18 @@ Memory
 			- Reliability: If one of your database servers is destroyed by a natural disaster, such as a typhoon or an earthquake, data is still preserved. You do not need to worry about data loss because data is replicated across multiple locations. 
 			- High availability: By replicating data across different locations, your website remains in operation even if a database is offline as you can access data stored in another database server.
 		- If the master database goes offline, a slave database will be promoted to be the new master. All the database operations will be temporarily executed on the new master database. A new slave database will replace the old one for data replication immediately. In production systems, promoting a new master is more complicated as the data in a slave database might not be up to date. The missing data needs to be updated by running data recovery scripts.
-	- Sharding
+  - **Scaling**
+    - Vertical scaling
+      - Add more power to existing machine. AWS RDS can support upto 24Tb of memory. 
+      - Stackoverflow in 2013 with one master shards handled 10 million unique users.
+      - Drawbacks
+        - Hardware limits
+        - SPOF
+        - High cost
+    - **Horizontal scaling / Sharding**
+      - Horizontal scaling, also known as sharding, is the practice of adding more servers. Sharding separates large databases into smaller, more easily managed parts called shards. Each shard shares the same schema, though the actual data on each shard is unique to the shard.
+      - 
+
 ## Cache
 - A cache is a temporary storage area that stores the result of expensive responses or frequently accessed data in memory so that subsequent requests are served more quickly.
 - The application performance is greatly affected by calling the database repeatedly. The cache can mitigate this problem.
