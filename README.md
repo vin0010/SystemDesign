@@ -52,12 +52,11 @@ Memory
 
 	- Stateless web tier by extracting user/session details to a data store
 ## CDN
-	- A CDN is a network of geographically dispersed servers used to deliver static content.
-	- Considerations
-		- Cost
-		- Expiration time
-		- CDN fallback to fetch data from origin
-		-
+- A CDN is a network of geographically dispersed servers used to deliver static content.
+- Considerations
+	- Cost
+	- Expiration time
+	- CDN fallback to fetch data from origin
 
 ## Data centers - Geo(partitioning?)
 	- To improve availability and provide a better user experience across wider geographical areas, supporting multiple data centers is crucial.
