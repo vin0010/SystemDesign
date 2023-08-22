@@ -24,6 +24,9 @@ Memory
 
 
 ------- 
+## General Design template
+<img width="636" alt="image" src="https://github.com/vin0010/SystemDesign/assets/10086767/f4305e92-6ef0-4a48-8789-0834e33c5979">
+
 
 ## Database
 - Non-relational databases might be the right choice if: • Your application requires super-low latency.
