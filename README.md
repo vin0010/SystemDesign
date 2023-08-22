@@ -25,7 +25,8 @@ Memory
 
 ------- 
 ## General Design template
-<img width="636" alt="image" src="https://github.com/vin0010/SystemDesign/assets/10086767/f4305e92-6ef0-4a48-8789-0834e33c5979">
+<img width="636" alt="image" src="https://github.com/vin0010/SystemDesign/assets/10086767/b0db6ecc-d776-4eae-9131-ae3afd85f07c">
+
 
 
 ## Database
