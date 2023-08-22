@@ -59,15 +59,15 @@ Memory
 	- CDN fallback to fetch data from origin
 
 ## Data centers - Geo(partitioning?)
-	- To improve availability and provide a better user experience across wider geographical areas, supporting multiple data centers is crucial.
-	- Users are geoDNS-routed, also known as geo-routed, to the closest data center
-	- geoDNS is a DNS service that allows domain names to be resolved to IP addresses based on the location of a user.
-	- In the event of any significant data center outage, we direct all traffic to a healthy data center.
-	- Several technical challenges must be resolved to achieve multi-data center setup: 
-		- Traffic redirection: Effective tools are needed to direct traffic to the correct data center. 
-		- Data synchronization: Users from different regions could use different local databases or caches. 
-		- In failover cases, traffic might be routed to a data center where data is unavailable.
-		- Test and deployment: With multi-data center setup, it is important to test your website/application at different locations. Automated deployment tools are vital to keep services consistent through all the data centers
+- To improve availability and provide a better user experience across wider geographical areas, supporting multiple data centers is crucial.
+- Users are geoDNS-routed, also known as geo-routed, to the closest data center
+- geoDNS is a DNS service that allows domain names to be resolved to IP addresses based on the location of a user.
+- In the event of any significant data center outage, we direct all traffic to a healthy data center.
+- Several technical challenges must be resolved to achieve multi-data center setup: 
+	- Traffic redirection: Effective tools are needed to direct traffic to the correct data center. 
+	- Data synchronization: Users from different regions could use different local databases or caches. 
+	- In failover cases, traffic might be routed to a data center where data is unavailable.
+	- Test and deployment: With multi-data center setup, it is important to test your website/application at different locations. Automated deployment tools are vital to keep services consistent through all the data centers
 
 
 ## Load balancer
