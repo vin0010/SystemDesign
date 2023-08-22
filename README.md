@@ -25,20 +25,20 @@ Memory
 
 ------- 
 
-Database
-	- Non-relational databases might be the right choice if: • Your application requires super-low latency.
-	- • Your data are unstructured, or you do not have any relational data.
-	- You only need to serialize and deserialize data (JSON, XML, YAML, etc.).
-	- RDBMS
-		- Master/Slave
-			- A master database generally only supports write operations. A slave database gets copies of the data from the master database and only supports read operations. All the data-modifying commands like insert, delete, or update must be sent to the master database. Most applications require a much higher ratio of reads to writes; thus, the number of slave databases in a system is usually larger than the number of master databases.
-			- Advantages of database replication: 
-				- Better performance: In the master-slave model, all writes and updates happen in master nodes; whereas, read operations are distributed across slave nodes. This model improves performance because it allows more queries to be processed in parallel. 
-				- Reliability: If one of your database servers is destroyed by a natural disaster, such as a typhoon or an earthquake, data is still preserved. You do not need to worry about data loss because data is replicated across multiple locations. 
-				- High availability: By replicating data across different locations, your website remains in operation even if a database is offline as you can access data stored in another database server.
-			- If the master database goes offline, a slave database will be promoted to be the new master. All the database operations will be temporarily executed on the new master database. A new slave database will replace the old one for data replication immediately. In production systems, promoting a new master is more complicated as the data in a slave database might not be up to date. The missing data needs to be updated by running data recovery scripts.
+## Database
+- Non-relational databases might be the right choice if: • Your application requires super-low latency.
+- Your data are unstructured, or you do not have any relational data.
+- You only need to serialize and deserialize data (JSON, XML, YAML, etc.).
+- RDBMS
+	- Master/Slave
+		- A master database generally only supports write operations. A slave database gets copies of the data from the master database and only supports read operations. All the data-modifying commands like insert, delete, or update must be sent to the master database. Most applications require a much higher ratio of reads to writes; thus, the number of slave databases in a system is usually larger than the number of master databases.
+		- Advantages of database replication: 
+			- Better performance: In the master-slave model, all writes and updates happen in master nodes; whereas, read operations are distributed across slave nodes. This model improves performance because it allows more queries to be processed in parallel. 
+			- Reliability: If one of your database servers is destroyed by a natural disaster, such as a typhoon or an earthquake, data is still preserved. You do not need to worry about data loss because data is replicated across multiple locations. 
+			- High availability: By replicating data across different locations, your website remains in operation even if a database is offline as you can access data stored in another database server.
+		- If the master database goes offline, a slave database will be promoted to be the new master. All the database operations will be temporarily executed on the new master database. A new slave database will replace the old one for data replication immediately. In production systems, promoting a new master is more complicated as the data in a slave database might not be up to date. The missing data needs to be updated by running data recovery scripts.
 
-Cache
+## Cache
 	- A cache is a temporary storage area that stores the result of expensive responses or frequently accessed data in memory so that subsequent requests are served more quickly.
 	- The application performance is greatly affected by calling the database repeatedly. The cache can mitigate this problem.
 	- Here are a few considerations for using a cache system
@@ -51,7 +51,7 @@ Cache
 		- Eviction policies
 
 	- Stateless web tier by extracting user/session details to a data store
-CDN
+## CDN
 	- A CDN is a network of geographically dispersed servers used to deliver static content.
 	- Considerations
 		- Cost
@@ -59,7 +59,7 @@ CDN
 		- CDN fallback to fetch data from origin
 		-
 
-Data centers - Geo(partitioning?)
+## Data centers - Geo(partitioning?)
 	- To improve availability and provide a better user experience across wider geographical areas, supporting multiple data centers is crucial.
 	- Users are geoDNS-routed, also known as geo-routed, to the closest data center
 	- geoDNS is a DNS service that allows domain names to be resolved to IP addresses based on the location of a user.
@@ -71,19 +71,19 @@ Data centers - Geo(partitioning?)
 		- Test and deployment: With multi-data center setup, it is important to test your website/application at different locations. Automated deployment tools are vital to keep services consistent through all the data centers
 
 
-Load balancer
+## Load balancer
 	- Improves system availability
 	- A load balancer evenly distributes incoming traffic among web servers that are defined in a load-balanced set.
 	- The load balancer communicates with web servers through private IPs.
 	- 
 
 
-Message Queue
+## Message Queue
 	- To further scale our system, we need to decouple different components of the system so they can be scaled independently. Messaging queue is a key strategy employed by many real-world distributed systems to solve this problem.
 	- The basic architecture of a message queue is simple. Input services, called producers/publishers, create messages, and publish them to a message queue. Other services or servers, called consumers/subscribers, connect to the queue, and perform actions defined by the messages.
 	- Decoupling makes the message queue a preferred architecture for building a scalable and reliable application. With the message queue, the producer can post a message to the queue when the consumer is unavailable to process it. The consumer can read messages from the queue even when the producer is unavailable.
 
-Logging, metrics, automation
+## Logging, metrics, automation
 	- Metrics: Collecting different types of metrics help us to gain business insights and understand the health status of the system. Some of the following metrics are useful: • Host level metrics: CPU, Memory, disk I/O, etc.
 		- Aggregated level metrics: for example, the performance of the entire database tier, cache tier, etc. 
 		- Key business metrics: daily active users, retention, revenue, etc.
