@@ -75,22 +75,21 @@ Memory
 
 
 ## Load balancer
-	- Improves system availability
-	- A load balancer evenly distributes incoming traffic among web servers that are defined in a load-balanced set.
-	- The load balancer communicates with web servers through private IPs.
-	- 
+- Improves system availability
+- A load balancer evenly distributes incoming traffic among web servers that are defined in a load-balanced set.
+- The load balancer communicates with web servers through private IPs.
 
 
 ## Message Queue
-	- To further scale our system, we need to decouple different components of the system so they can be scaled independently. Messaging queue is a key strategy employed by many real-world distributed systems to solve this problem.
-	- The basic architecture of a message queue is simple. Input services, called producers/publishers, create messages, and publish them to a message queue. Other services or servers, called consumers/subscribers, connect to the queue, and perform actions defined by the messages.
-	- Decoupling makes the message queue a preferred architecture for building a scalable and reliable application. With the message queue, the producer can post a message to the queue when the consumer is unavailable to process it. The consumer can read messages from the queue even when the producer is unavailable.
+- To further scale our system, we need to decouple different components of the system so they can be scaled independently. Messaging queue is a key strategy employed by many real-world distributed systems to solve this problem.
+- The basic architecture of a message queue is simple. Input services, called producers/publishers, create messages, and publish them to a message queue. Other services or servers, called consumers/subscribers, connect to the queue, and perform actions defined by the messages.
+- Decoupling makes the message queue a preferred architecture for building a scalable and reliable application. With the message queue, the producer can post a message to the queue when the consumer is unavailable to process it. The consumer can read messages from the queue even when the producer is unavailable.
 
 ## Logging, metrics, automation
-	- Metrics: Collecting different types of metrics help us to gain business insights and understand the health status of the system. Some of the following metrics are useful: • Host level metrics: CPU, Memory, disk I/O, etc.
-		- Aggregated level metrics: for example, the performance of the entire database tier, cache tier, etc. 
-		- Key business metrics: daily active users, retention, revenue, etc.
-	- Automation: When a system gets big and complex, we need to build or leverage automation tools to improve productivity. Continuous integration is a good practice, automating your build, test, deploy process, etc. could improve developer productivity significantly.
+- Metrics: Collecting different types of metrics help us to gain business insights and understand the health status of the system. Some of the following metrics are useful: • Host level metrics: CPU, Memory, disk I/O, etc.
+	- Aggregated level metrics: for example, the performance of the entire database tier, cache tier, etc. 
+	- Key business metrics: daily active users, retention, revenue, etc.
+- Automation: When a system gets big and complex, we need to build or leverage automation tools to improve productivity. Continuous integration is a good practice, automating your build, test, deploy process, etc. could improve developer productivity significantly.
 
 
 
