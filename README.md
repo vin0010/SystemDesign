@@ -1,6 +1,14 @@
 # SystemDesign
 > Many think that system design interview is all about a person's technical design skills. It is much more than that. An effective system design interview gives strong signals about a person's ability to collaborate, to work under pressure, and to resolve ambiguity constructively. The ability to ask good questions is also an essential skill, and many interviewers specifically look for this skill.
 
+## 4 steps
+1. Understand the problem and establish design scope
+2. Propose high-level design and get buy-in
+3. Design deep dive
+4. Wrap up
+
+
+
 Concurrency
 - Higher concurrency means more open connections, more active threads, more messages being processed at the same time, and more CPU context switches.
 
