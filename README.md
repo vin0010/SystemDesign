@@ -3,12 +3,45 @@
 
 ## 4 steps
 1. Understand the problem and establish design scope
+   1. This is very important
+   2. Ask clarifying questions
+   3. If the interviewer ask you to make assumptions, write down assumptions
+   4. Check if you need back of the end envelope
 2. Propose high-level design and get buy-in
+   1. Come up with an initial blueprint for the design. Ask for feedback. Treat your interviewer as a teammate and work together. Many good interviewers love to talk and get involved.
+   2. Draw box diagrams with key components on the whiteboard or paper. This might include clients (mobile/web), APIs, web servers, data stores, cache, CDN, message queue, etc.
+   3. If possible, go through a few concrete use cases. This will help you frame the high-level design. It is also likely that the use cases would help you discover edge cases you have not yet considered.
+   4. API and schema ->  depends on the problem, for design google search engine not necessary, for multiplayer poker game, it makes sense.
 3. Design deep dive
+   1. Had some initial ideas about areas to focus on in deep dive based on her feedback You shall work with the interviewer to identify and prioritize components in the architecture.
+   2. Add more details to the system(look into news feed system diagram below)
+   3. Talk about bottlenecks 
 4. Wrap up
+   1. Recap the system if necessary
+   2. Error cases (server failure, network loss, etc.) are interesting to talk about.
+   3. Metrics and error logging
+   4. How to handle the next scale curve is also an interesting topic. For example, if your current design supports 1 million users, what changes do you need to make to support 10
 
 
+### Dos
+- Always ask for clarification. Do not assume your assumption is correct. 
+- Understand the requirements of the problem. 
+- There is neither the right answer nor the best answer. A solution designed to solve the problems of a young startup is different from that of an established company with millions of users. Make sure you understand the requirements. 
+- Let the interviewer know what you are thinking. Communicate with your interviewer. 
+- Suggest multiple approaches if possible. 
+- Once you agree with your interviewer on the blueprint, go into details on each component. Design the most critical components first. 
+- Convey ideas to the interviewer
+- Don’t go into too much detail on a single component in the beginning. Give the high-level design first then drills down.
+### Don'ts 
+- Don’t go into too much detail on a single component in the beginning. Give the high-level design first then drills down.
+- Communicate. Don't think in silence.
+### Time
+- Step 1 Understand the problem and establish design scope: 3 - 10 minutes 
+- Step 2 Propose high-level design and get buy-in: 10 - 15 minutes 
+- Step 3 Design deep dive: 10 - 25 minutes 
+- Step 4 Wrap: 3 - 5 minutes
 
+Alex Xu. [EPUB]system-design-interview (Kindle Locations 514-517). Kindle Edition.
 Concurrency
 - Higher concurrency means more open connections, more active threads, more messages being processed at the same time, and more CPU context switches.
 
