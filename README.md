@@ -1,5 +1,5 @@
 # SystemDesign
-
+> Many think that system design interview is all about a person's technical design skills. It is much more than that. An effective system design interview gives strong signals about a person's ability to collaborate, to work under pressure, and to resolve ambiguity constructively. The ability to ask good questions is also an essential skill, and many interviewers specifically look for this skill.
 
 Concurrency
 - Higher concurrency means more open connections, more active threads, more messages being processed at the same time, and more CPU context switches.
@@ -8,10 +8,17 @@ Scalability
 - To further scale our system, we need to decouple different components of the system so they can be scaled independently.
 - If your system is very tightly interconnected, you may struggle to scale your engineering team
 - Once your application reaches the limits of your server (due to increase in traffic, amount of data processed, or concurrency levels), you must decide how to scale further
-
 	- Vertical Scaling
 		- It is often the simplest solution for shortterm scalability
 		- Vertical scalability becomes extremely expensive beyond a certain point.
+- To Scale a system
+  - Build redundancy at every tier 
+  - Cache data as much as you can 
+  - Support multiple data centers 
+  - Host static assets in CDN 
+  - Scale your data tier by sharding 
+  - Split tiers into individual services 
+  - Monitor your system and use automation tools
 
 
 
@@ -52,6 +59,14 @@ Memory
     - **Horizontal scaling / Sharding**
       - Horizontal scaling, also known as sharding, is the practice of adding more servers. Sharding separates large databases into smaller, more easily managed parts called shards. Each shard shares the same schema, though the actual data on each shard is unique to the shard.
       - <img width="594" alt="image" src="https://github.com/vin0010/SystemDesign/assets/10086767/27f0fe1f-7e53-45b7-918e-3a68ead928c7">
+      - The most important factor to consider when implementing a sharding strategy is the choice of the sharding key. Sharding key (known as a partition key) consists of one or more columns that determine how data is distributed.
+      - When choosing a sharding key, one of the most important criteria is to choose a key that can evenly distributed data.
+      - Problems with sharding
+        - Resharding data: Resharding data is needed when 1) a single shard could no longer hold more data due to rapid growth. 2) Certain shards might experience shard exhaustion faster than others due to uneven data distribution. When shard exhaustion happens, it requires updating the sharding function and moving data around. Consistent hashing, which will be discussed in Chapter 5, is a commonly used technique to solve this problem. 
+        - Celebrity problem: This is also called a hotspot key problem. Excessive access to a specific shard could cause server overload. Imagine data for Katy Perry, Justin Bieber, and Lady Gaga all end up on the same shard. For social applications, that shard will be overwhelmed with read operations. To solve this problem, we may need to allocate a shard for each celebrity. Each shard might even require further partition. 
+        - Join and de-normalization: Once a database has been sharded across multiple servers, it is hard to perform join operations across database shards. A common workaround is to de-normalize the database so that queries can be performed in a single table.
+
+
 
 
 ## Cache
