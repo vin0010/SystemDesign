@@ -15,7 +15,8 @@
 3. Design deep dive
    1. Had some initial ideas about areas to focus on in deep dive based on her feedback You shall work with the interviewer to identify and prioritize components in the architecture.
    2. Add more details to the system(look into news feed system diagram below)
-   3. Talk about bottlenecks 
+   3. Talk about bottlenecks
+   4. **Talk about Game days to simulate failure in each component and see how can we improve. **
 4. Wrap up
    1. Recap the system if necessary
    2. Error cases (server failure, network loss, etc.) are interesting to talk about.
