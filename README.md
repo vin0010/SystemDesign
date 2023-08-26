@@ -78,6 +78,8 @@ Memory
 
 
 ## Database
+![image](https://github.com/vin0010/SystemDesign/assets/10086767/17f4b25d-2e29-4350-a5fa-46e4d6131b5d)
+
 - Non-relational databases might be the right choice if: • Your application requires super-low latency.
 - Your data are unstructured, or you do not have any relational data.
 - You only need to serialize and deserialize data (JSON, XML, YAML, etc.).
