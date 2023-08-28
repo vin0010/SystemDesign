@@ -36,7 +36,6 @@
 - Suggest multiple approaches if possible. 
 - Once you agree with your interviewer on the blueprint, go into details on each component. Design the most critical components first. 
 - Convey ideas to the interviewer
-- Don’t go into too much detail on a single component in the beginning. Give the high-level design first then drills down.
 ### Don'ts 
 - Don’t go into too much detail on a single component in the beginning. Give the high-level design first then drills down.
 - Communicate. Don't think in silence.
