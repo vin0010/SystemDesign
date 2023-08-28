@@ -121,11 +121,20 @@ Memory
 - A load balancer evenly distributes incoming traffic among web servers that are defined in a load-balanced set.
 - The load balancer communicates with web servers through private IPs.
 
+## Redundancy
 
 ## Message Queue
 - To further scale our system, we need to decouple different components of the system so they can be scaled independently. Messaging queue is a key strategy employed by many real-world distributed systems to solve this problem.
 - The basic architecture of a message queue is simple. Input services, called producers/publishers, create messages, and publish them to a message queue. Other services or servers, called consumers/subscribers, connect to the queue, and perform actions defined by the messages.
 - Decoupling makes the message queue a preferred architecture for building a scalable and reliable application. With the message queue, the producer can post a message to the queue when the consumer is unavailable to process it. The consumer can read messages from the queue even when the producer is unavailable.
+- Partition is a queue
+- Consumers
+  - Consumers are very lightweight and you can have as many as you want. ( because Kafka maintains offset for each consumer group) 
+  - Consumer group with bunch of consumers will not share partitions.
+- Retention policy
+  - TTL/age limit
+- Fault tolerant & durable
+- Kafka replicates partitions, so when a broker goes down, backup partition takes over and resume.    
 
 ## Logging, metrics, automation
 - Metrics: Collecting different types of metrics help us to gain business insights and understand the health status of the system. Some of the following metrics are useful: • Host level metrics: CPU, Memory, disk I/O, etc.
