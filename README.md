@@ -120,6 +120,8 @@ Memory
 - Improves system availability
 - A load balancer evenly distributes incoming traffic among web servers that are defined in a load-balanced set.
 - The load balancer communicates with web servers through private IPs.
+- ![image](https://github.com/vin0010/SystemDesign/assets/10086767/a5eb623c-d907-47ad-b94b-4ca2e1d4ef5c)
+
 
 ## Redundancy
 
