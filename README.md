@@ -5,6 +5,7 @@
 
 > CAP theorem considers 100% of C or A or Pbut in real world its about degrees of consistency and availability
 
+
 ## 4 steps
 1. Understand the problem and establish design scope
    1. This is very important
@@ -27,6 +28,12 @@
    3. Metrics and error logging
    4. How to handle the next scale curve is also an interesting topic. For example, if your current design supports 1 million users, what changes do you need to make to support 10
 
+### Talk about
+- Database scaling
+- High concurrency
+- Failure scenarios
+- After choosing database talk about indexing options
+- 
 
 ### Dos
 - Always ask for clarification. Do not assume your assumption is correct. 
@@ -49,6 +56,7 @@
 
 ### Concurrency
 - Higher concurrency means more open connections, more active threads, more messages being processed at the same time, and more CPU context switches.
+- 
 
 ### Scalability
 - To further scale our system, we need to decouple different components of the system so they can be scaled independently.
