@@ -44,14 +44,24 @@
                 - Celebrity problem: This is also called a hotspot key problem. Excessive access to a specific shard could cause server overload. Imagine data for Katy Perry, Justin Bieber, and Lady Gaga all end up on the same shard. For social applications, that shard will be overwhelmed with read operations. To solve this problem, we may need to allocate a shard for each celebrity. Each shard might even require further partition.
                 - Join and de-normalization: Once a database has been sharded across multiple servers, it is hard to perform join operations across database shards. A common workaround is to de-normalize the database so that queries can be performed in a single table.
 
-
 ### Performance of MYsql
+#### Concurrency
+- Pessimistic concurrency control vs Optimistic concurrency control
+  - Database handle these locks in row level. If a single row is being concurrently handled by 1000s of queries, that's a really a bad design.
+  - If data access conflicts are very rare, go with optimistic or use pessimistic. 
+  - In pessimistic, locks are used. 
 
 
 ### Organize
 - Tune memory size
 - Migrating live prod database is very complex and costly
+- Cassandra handle high volume of writes
 
 ### Check 
 - What is read after write consistency
-- 
+
+
+### Number
+So 9.3 million rows + 1 m and expected increase of 3-5 million rows every year. So I'm wondering if I will regret this decision in 2 years time or will PostgreSQL be still doing fine with 20M rows, 40M rows, 100M rows, ...
+
+I'm running General Purpose, 8 vCore(s), 50 GB Azure PostgreSQL barely scratching 40% CPU (I will be downscaling it soon)
