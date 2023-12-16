@@ -74,5 +74,4 @@
 
 ### Number
 So 9.3 million rows + 1 m and expected increase of 3-5 million rows every year. So I'm wondering if I will regret this decision in 2 years time or will PostgreSQL be still doing fine with 20M rows, 40M rows, 100M rows, ...
-
 I'm running General Purpose, 8 vCore(s), 50 GB Azure PostgreSQL barely scratching 40% CPU (I will be downscaling it soon)
