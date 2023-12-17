@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 A good engineer always thinks like a product manager ⚡
 
 A good engineer creates differentiating business value by aligning the work with business priorities. It is easy to write code and design systems, what's difficult is to drive business outcomes.
@@ -10,3 +11,6 @@ When you get your next work item, show extreme ownership and understand how your
 - is your work helping the company reduce its expenditure?
 
 Always remember, the priority is always business > product > engineering. Without business we do not stand a chance, so always align yourself with the business and drive positive outcomes.
+=======
+
+>>>>>>> origin/main
