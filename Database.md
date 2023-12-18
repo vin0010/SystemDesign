@@ -48,7 +48,12 @@
                     - Celebrity problem: This is also called a hotspot key problem. Excessive access to a specific shard could cause server overload. Imagine data for Katy Perry, Justin Bieber, and Lady Gaga all end up on the same shard. For social applications, that shard will be overwhelmed with read operations. To solve this problem, we may need to allocate a shard for each celebrity. Each shard might even require further partition.
                     - Join and de-normalization: Once a database has been sharded across multiple servers, it is hard to perform join operations across database shards. A common workaround is to de-normalize the database so that queries can be performed in a single table.
   - RDBMS uses complex two way locking mechanism to achieve correctness and maintain ACID property.
-  - 
+- NoSQL
+   - Instead of storing data in rows, we can store data in documents with IDs and I can store nested documents. We can store ton of data in this collection. 
+   - Limited querying capabilities. 
+   - Storing denormalized duplicate data lead to inconsistency ( need to sync)
+   - Most support transactions.
+   - Better for read intensive and non structured data
 - Time Series Database
   - Very high write throughput
   - Regular and irregular writes
