@@ -60,6 +60,60 @@
   - Data needs to be highly compressed
   - Large range scans of many records, so need to handle rollup and aggregation mechanism before if it make sense.
   - Write latest time entry only
+  - Using time series DB is useful for read, write and data visualization
+- Databases
+  - MongoDB
+    - Support transactions and Btrees
+  - Cassandra
+    - Fast writes, slower reads, little compromise a little on consistency adn occasional data is lost on overwritten 
+    - Wide column data store like spreadsheet
+    - Support multi leader and leaderless replication ( configurable )
+    - Support quorum writes
+      - Each data operation, such as read or write, requires a certain number of nodes to acknowledge the operation before it is considered successful. This number is called the quorum and is usually a majority of the nodes.
+    - Write conflicts - cassandra let last write wins. There can be issues if lower time stamps write processed later
+    - Use LSM tree and SSM tables for indexing
+    - Slower reads
+    - Ideal for chat applications where chat ID is used to decide the shard and all of the messages are ordered by timestamp as sort key
+    - Weakness - 
+      - Conflict resolution ( last write wins)
+      - SLower reads
+  - RIAK
+    - Key Value store 
+    - Same as cassandra ( cassandra is wide column store )
+    - Use CRDTS(conflict free replicated data types) in order to deal with conflict resolution
+    - Aggregating conflicting writes and process them
+    - Handy when dealing with counters and sets in multi leader or leaderless replication 
+    - eventually consistent
+  - Apache Hbase
+    - Wide column as cassandra
+    - Built on top of Hdfs/Hadoop. 
+    - Only single leader replication
+    - No need to worry about write conflicts
+    - Used column wide storage to store data. Helpful for column based locality. 
+    - Useful for fast reads on columns. 
+  - MemCache and Redis
+    - Key value stores
+    - Implemented in memory
+    - Redis rich feature set-> geo sharding, sorted sets, 
+    - Built using hashmap internally. 
+    - Worse for range queries
+    - Useful small data sets since in memory
+    - Useful in geo spatial index in uber and swiggy, constantly update driver locations. 
+  - Neo4j
+    - Graph databse
+    - We can use Graph in SQL with many to many relationships but very slow. 
+    - Graph with SQL capabilities
+    - Pointers to actual location of adjacent nodes, fetch in constant time opposed to SQL based constant time.
+    - Map data, modelling friends. 
+  - TimeScaleDB/Apache Druid
+    - Append only database is one option
+    - LSM Tree + SS Tables for indexing -> fast writes
+    - Multiple LSM indexes with time indexed data
+    - Use tombstone method to delete irrelevent data
+    - Useful for logs, sensor data, ingestion etc
+    - Instead of one large index for one table, they split the table to bunch of mini index. SO write and read will be effective
+    - They also delete certain data once its old.
+    
 ### Performance of MYsql
 #### Concurrency
 - Pessimistic concurrency control vs Optimistic concurrency control
