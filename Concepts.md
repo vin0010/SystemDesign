@@ -181,6 +181,43 @@ Concepts
 - Disaster recovery and backup plans
 - Performance monitoring and alerting
 
+## Organize
+- Content Delivery Network (CDN): https://lnkd.in/gjJrEJeH
+- Caching: https://lnkd.in/gC9piQbJ
+- Distributed Caching: https://lnkd.in/g7WKydNg
+- Latency vs Throughput: https://lnkd.in/g_amhAtN
+- CAP Theorem: https://lnkd.in/g3hmVamx
+- Load Balancing: https://lnkd.in/gQaa8sXK
+- ACID Transactions: https://lnkd.in/gMe2JqaF
+- SQL vs NoSQL: https://lnkd.in/g3WC_yxn
+- Consistent Hashing: https://lnkd.in/gd3eAQKA
+- Database Index: https://lnkd.in/gCeshYVt
+- Rate Limiting: https://lnkd.in/gWsTDR3m
+- Microservices Architecture: https://lnkd.in/gFXUrz_T
+- Strong vs Eventual Consistency: https://lnkd.in/gJ-uXQXZ
+- REST vs RPC: https://lnkd.in/gN__zcAB
+- Batch Processing vs. Stream Processing: https://lnkd.in/g4_MzM4s
+- HeartBeat: https://lnkd.in/g4x7sMrF
+- Circuit Breaker: https://lnkd.in/gCxyFzKm
+- Idempotency: https://lnkd.in/gPm6EtKJ
+- Database Scaling: https://lnkd.in/gAXpSyWQ
+- Data Replication: https://lnkd.in/gVAJxTpS
+- Data Redundancy: https://lnkd.in/gNN7TF7n
+- Database Sharding: https://lnkd.in/gMqqc6x9
+- Proxy Server: https://lnkd.in/gi8KnKS6
+- Domain Name System (DNS): https://lnkd.in/gkMcZW8V
+- Message Queues: https://lnkd.in/gTzY6uk8
+- WebSockets: https://lnkd.in/g76Gv2KQ
+- Consensus Algorithms: https://lnkd.in/ggc3tFbr
+- Fault Tolerance: https://lnkd.in/dVJ6n3wA
+- Failover: https://lnkd.in/dihZ-cEG
+- Gossip Protocol: https://lnkd.in/gfPMtrJZ
+- API Gateway: https://lnkd.in/gnsJGJaM
+- Distributed Locking: https://lnkd.in/gRxNJwWE
+- Distributed Tracing: https://lnkd.in/d6r5RdXG
+- Bloom Filters: https://lnkd.in/dt4QbSUz
+- Checksum: https://lnkd.in/ghNc5pfn
+
 
 ## Technologies
 1. Databases:
