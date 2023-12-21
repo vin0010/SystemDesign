@@ -14,6 +14,17 @@
    2. Ask clarifying questions
    3. If the interviewer ask you to make assumptions, write down assumptions
    4. Check if you need back of the end envelope
+      - 1 Million req per day = 12 rps
+      - Numbers
+        - 1 Million - 10^6
+        - 1 Billion - 10^9
+        - 1 Trillion - 10^12
+      - Storage numbers
+        - 1B - 8 bits
+        - 1KB - 1024 Bytes
+        - 1MB - 1024 KB
+        - 1GB - 1024 MB
+        - 
 2. Propose high-level design and get buy-in
    1. Come up with an initial blueprint for the design. Ask for feedback. Treat your interviewer as a teammate and work together. Many good interviewers love to talk and get involved.
    2. Draw box diagrams with key components on the whiteboard or paper. This might include clients (mobile/web), APIs, web servers, data stores, cache, CDN, message queue, etc.
@@ -49,6 +60,7 @@
 ### Don'ts 
 - Don’t go into too much detail on a single component in the beginning. Give the high-level design first then drills down.
 - Communicate. Don't think in silence.
+- Don't 
 
 ### Time
 - Step 1 Understand the problem and establish design scope: 3 - 10 minutes 
@@ -56,82 +68,12 @@
 - Step 3 Design deep dive: 10 - 25 minutes 
 - Step 4 Wrap: 3 - 5 minutes
 
-### Concurrency
-- Higher concurrency means more open connections, more active threads, more messages being processed at the same time, and more CPU context switches.
-- 
-
-### Scalability
-- To further scale our system, we need to decouple different components of the system so they can be scaled independently.
-- If your system is very tightly interconnected, you may struggle to scale your engineering team
-- Once your application reaches the limits of your server (due to increase in traffic, amount of data processed, or concurrency levels), you must decide how to scale further
-	- Vertical Scaling
-		- It is often the simplest solution for shortterm scalability
-		- Vertical scalability becomes extremely expensive beyond a certain point.
-- To Scale a system
-  - Build redundancy at every tier 
-  - Cache data as much as you can 
-  - Support multiple data centers 
-  - Host static assets in CDN 
-  - Scale your data tier by sharding 
-  - Split tiers into individual services 
-  - Monitor your system and use automation tools
-
-Memory
-- Improving I/O access times by switching to solid-state drives (SSDs). Solid-state drives are becoming more and more popular as the technology matures and prices continue to fall.
-- Random reads and writes using SSDs are between 10 and 100 times faster,
-
-
-
-
 ------- 
 ## General Design template
 <img width="636" alt="image" src="https://github.com/vin0010/SystemDesign/assets/10086767/b0db6ecc-d776-4eae-9131-ae3afd85f07c">
 
 
-
-## Database
-
-
-
-
-## Cache
-- A cache is a temporary storage area that stores the result of expensive responses or frequently accessed data in memory so that subsequent requests are served more quickly.
-- The application performance is greatly affected by calling the database repeatedly. The cache can mitigate this problem.
-- Here are a few considerations for using a cache system
-	- Decide when to use cache. Consider using cache when data is read frequently but modified infrequently.
-	- Expiration policy
-		- It is advisable not to make the expiration date too short as this will cause the system to reload data from the database too frequently. Meanwhile, it is advisable not to make the expiration date too long as the data can become stale.
-	- Consistency: This involves keeping the data store and the cache in sync. Inconsistency can happen because data-modifying operations on the data store and cache are not in a single transaction. When scaling across multiple regions, maintaining consistency between the data store and cache is challenging.
-	- Mitigating failures: A single cache server represents a potential single point of failure
-	- Another recommended approach is to overprovision the required memory by certain percentages.
-	- Eviction policies
-
-	- Stateless web tier by extracting user/session details to a data store
-## CDN
-- A CDN is a network of geographically dispersed servers used to deliver static content.
-- Considerations
-	- Cost
-	- Expiration time
-	- CDN fallback to fetch data from origin
-
-## Data centers - Geo(partitioning?)
-- To improve availability and provide a better user experience across wider geographical areas, supporting multiple data centers is crucial.
-- geoDNS is a DNS service that allows domain names to be resolved to IP addresses based on the location of a user.
-- Users are geoDNS-routed, also known as geo-routed, to the closest data center
-- In the event of any significant data center outage, we direct all traffic to a healthy data center.
-- Several technical challenges must be resolved to achieve multi-data center setup: 
-	- Traffic redirection: Effective tools are needed to direct traffic to the correct data center. 
-	- Data synchronization: Users from different regions could use different local databases or caches. 
-	- In fail-over cases, traffic might be routed to a data center where data is unavailable.
-	- Test and deployment: With multi-data center setup, it is important to test your website/application at different locations. Automated deployment tools are vital to keep services consistent through all the data centers
-
-
-## Load balancer
-- Improves system availability
-- A load balancer evenly distributes incoming traffic among web servers that are defined in a load-balanced set.
-- The load balancer communicates with web servers through private IPs.
-- ![image](https://github.com/vin0010/SystemDesign/assets/10086767/a5eb623c-d907-47ad-b94b-4ca2e1d4ef5c)
-
+# Organize
 
 ## Redundancy
 
@@ -178,5 +120,7 @@ Memory
 - Build confidence by doing game day testing and deliberately fail components and check how the system holding up and if it require any fine tuning/fix.
 - SLA agreements by checking SLA latencies(P99, 95 and 50) to improve customer confidence and also know how much you can scale further
 - P99 through the roof
-- 
+- Time stamp in distributed system is not reliable unless we use something like a GPS clock.
+- In single thread race condition not possible. 
+
 

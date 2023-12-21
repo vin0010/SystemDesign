@@ -22,19 +22,29 @@ Concepts
 - Distributed consensus protocols
   - RAFT
 - Scalability
+  - Vertical
+    - Single point of failure
+  - Horizontal
+    - Add Redundancy and Fault tolerance 
+    - Scale infinitely
+    - Need bunch of other tools like LB, Reverse proxy.  
 - [Concurrency](Concurrency.md)
 
 ## Data Storage and management
-- Databases
+- [Look into Databases for deep dive](Database.md)
   - SQL
+    - Postgres
+    - MySQL
+    - MsSQL
   - NoSQL
-  - Key-value
-  - Document
-  - Graph
-  - Column store
-  - Time Series
-    - Using time series DB is useful for read, write and data visualization
+    - Key-value
+    - Document
+    - Graph
+    - Column store
+    - Time Series
+      - Using time series DB is useful for read, write and data visualization
   - Data Replication: Master-slave replication, Multi-master replication, Paxos algorithm
+  - Distributed transactions ( commit across multiple services/databases, covered in database section)
   - Data Partitioning
     - Sharding
     - Range partitioning
@@ -51,6 +61,7 @@ Concepts
 - Search
 
 ## Messaging
+- For a system that receives more data than it can process, we can use Message Queue. Our data is persisted before being processed, Help decoupling.  
 - Message brokers and queues
 - Message ordering and reliability
 - Event-driven architectures and systems
@@ -76,68 +87,102 @@ Concepts
    - Stateless web tier by extracting user/session details to a data store
 
 ## Networking and Protocols
+- TCP
+  - Set of rules to send data between two computers, 
+  - Files are broken down to individual packets(they are numbered for assembling).
+  - Once they arrive, packets are reassembled based on numbers. 
+- UDP
+  - DNS lookup uses UDP, no packet numbering mechanisms.
+- http/https is application level protocol built on top of TCP to abstract loading 
+- API paradigms
+  - REST
+  - GraphQL
+  - gROC
+    - gRPC ( used for server to server)
+    - gRPC web ( used for web to servers)
+    - Powered by protocol buffers (kind of json, data is serialized to binary format for storage efficient, but not human-readable like JSON)
+  - WebSocket
+    - Unlike http, bidirectional communication
+    - Connection established
 - Load balancers
   - Convey the type of load balancing ( Active passive etc )
   - Improves system availability
   - A load balancer evenly distributes incoming traffic among web servers that are defined in a load-balanced set.
   - The load balancer communicates with web servers through private IPs.
-  - ![image](https://github.com/vin0010/SystemDesign/assets/10086767/a5eb623c-d907-47ad-b94b-4ca2e1d4ef5c)
+  - <details>
+        <summary>Load Balancing Techniques</summary>
+        <img src="img_9.png" width="50%" alt="Load Balancing Techniques">
+    </details>
 - Reverse proxies and request routing
 - Web sockets and real-time communication
 - Remote procedure calls (RPC)
 - Consistent hashing for load balancing
 - Content delivery networks (CDNs)
     - A CDN is a network of geographically dispersed servers used to deliver static content.
+    - Suitable for static onctent
+      - CDN servers can update data based oni push/pull based approach. 
     - Considerations
       - Cost
       - Expiration time
       - CDN fallback to fetch data from origin
 
 ## Big Data and Stream Processing
-    - Big data processing frameworks: Hadoop, Spark, Kafka
-    - Batch processing and data pipelines
-    - Stream processing and real-time data analytics
-      - Flink consumer
-         - can keep a copy of local table so join with every message to move it to respective sub table/partition
-         - Can handle messages in real time
-      - Spark streaming consumer
-         - can keep a copy of local table so join with every message to move it to respective sub table/partition
-         - Can handle messages in mini batches.
-    - Apache Kafka and its role in big data
-    - Data ingestion, processing, aggregation and compression
-    - Data Aggregation
-       - Time based aggregation
-       - Aggregation windows
-          - Tumbling windows - Fixed length and fixed start time, non overlappting i.e start of every minute.
-          - Hopping window - 0-5, 1-6, 2-7 etc, overlaps.
-          - Sliding window - Maintain LL to find for any range
-    - Data encoding frameworks
-      - If you know the data format, you can use, ignore invalid data, you can use 
-        - Avro
-        - Protocol buffers
-        - Thrift
+- Big data processing frameworks: Hadoop, Spark, Kafka
+- Batch processing and data pipelines
+- Stream processing and real-time data analytics
+  - Flink consumer
+     - Can keep a copy of local table so join with every message to move it to respective sub table/partition
+     - Can handle messages in real time
+  - Spark streaming consumer
+     - can keep a copy of local table so join with every message to move it to respective sub table/partition
+     - Can handle messages in mini batches.
+  - Apache Kafka and its role in big data
+  - Data ingestion, processing, aggregation and compression
+  - Data Aggregation
+     - Time based aggregation
+     - Aggregation windows
+        - Tumbling windows - Fixed length and fixed start time, non overlappting i.e start of every minute.
+        - Hopping window - 0-5, 1-6, 2-7 etc, overlaps.
+        - Sliding window - Maintain LL to find for any range
+  - Data encoding frameworks
+    - If you know the data format, you can use, ignore invalid data, you can use 
+      - Avro
+      - Protocol buffers
+      - Thrift
    - Data visualization and dashboards
-
+- ### Event Sourcing / Event store 
+  - Helps to see historical state changes by recording all events.
+  - Useful in systems where you need reconciliation. 
 ## Service Discovery and Orchestration
-    - Service discovery protocols: ZooKeeper, Consul, etcd
-    - Service registration and discovery
-    - Distributed systems and microservices architecture
-    - Container orchestration platforms: Kubernetes, Docker Swarm
-    - Automated deployment and scaling
-    - Monitoring and alerting for distributed systems
+- Service discovery protocols: ZooKeeper, Consul, etcd
+- Service registration and discovery
+- Distributed systems and microservices architecture
+- Container orchestration platforms: Kubernetes, Docker Swarm
+- Automated deployment and scaling
+- Monitoring and alerting for distributed systems
+
+## Microservices
+- Services needs high cohesion low coupling. ( increase cohesion and decrease coupling ) 
+  - Cohesion
+    - Degree to which data inside a service/module belongs together
+  - Coupling
+    - Knowledge of one service in another service ( higher knowledge means higher coupling )
+    - Coupling is allowed, Just decide on good or bad coupling.
+    - <details>
+        <summary>Common coupling(Avoid 2 services updating similar data to database)</summary>
+        <img src="img_10.png" width="50%" alt="Distributed Transaction">
+      </details>
 
 ## Security and Reliability:
-    - Authentication and authorization mechanisms
-    - Data encryption and security protocols
-    - Distributed transaction management
-    - Resilience and fault tolerance strategies
-    - Disaster recovery and backup plans
-    - Performance monitoring and alerting
+- Authentication and authorization mechanisms
+- Data encryption and security protocols
+- Distributed transaction management
+- Resilience and fault tolerance strategies
+- Disaster recovery and backup plans
+- Performance monitoring and alerting
 
 
-
-Technologies
-
+## Technologies
 1. Databases:
     - MySQL, PostgreSQL, Oracle
     - MongoDB, Cassandra, Redis
