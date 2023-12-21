@@ -5,7 +5,11 @@
 
 > CAP theorem considers 100% of C or A or Pbut in real world its about degrees of consistency and availability
 
-![image](https://github.com/vin0010/SystemDesign/assets/10086767/f153d710-9cfa-420c-834c-e9464f6965c4)
+  <details>
+      <summary>System Design Interview Template</summary>
+      <img src="image/img_13.png" width="50%" alt="System Design Interview Template">
+  </details>
+
 
 
 ## 4 steps
