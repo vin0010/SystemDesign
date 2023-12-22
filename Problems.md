@@ -9,7 +9,7 @@ https://excalidraw.com/#json=430FBILICn5gUOHNEzWDw,ZLJ9la7U2IbLqVzNm26sSw
 | 3  | Consistent Hashing              | :x:                | :x:       | - Hashing<br>- Consistent Hashing<br>- Distributed Systems          |
 | 4  | KV store                        | :x:                | :x:       | - Key-Value Store<br>- NoSQL Databases                              |
 | 5  | UID generator                   | :x:                | :x:       | - Unique Identifier<br>- Distributed Systems                        |
-| 6  | URL shortener                   | :x:                | :x:       | - URL Shortening<br>- Hashing<br>- Redirects                        |
+| 6  | URL shortener                   | :white_check_mark: | :x:       | - URL Shortening<br>- Hashing<br>- Redirects                        |
 | 7  | Web crawler                     | :x:                | :x:       | - Web Crawling<br>- Distributed Systems                             |
 | 8  | Notification System             | :x:                | :x:       | - Notifications<br>- Pub/Sub<br>- Distributed Systems               |
 | 9  | News feed system                | :x:                | :x:       | - News Feed<br>- Social Networks<br>- Algorithms                    |
@@ -60,7 +60,9 @@ https://excalidraw.com/#json=430FBILICn5gUOHNEzWDw,ZLJ9la7U2IbLqVzNm26sSw
 - Enterprise service bus (https://leetcode.com/discuss/interview-question/system-design/734303/Microsoftor-Design-an-Enterprise-Service-Bus)
 - 
 
-
+## Tips
+- Don't talk anything about database during estimation and clarification
+- 
 ## 1. Distributed Metrics/Logging
 - Use message broker
   - In memory message broker Vs Log based message broker
@@ -80,37 +82,67 @@ https://excalidraw.com/#json=430FBILICn5gUOHNEzWDw,ZLJ9la7U2IbLqVzNm26sSw
     <img src="image/img.png" width="50%" alt="Architecture">
   </details>
 
-## 6. Tiny URL
+## 6. Tiny URL / Pastebin
 - Clarification and Estimation
   - Clarification
     - How long is the shortened URL? - Clarification
         - If they as short as possible, we should define length to avoid collision.
-    - Chars allowed in hash
-  - URL deleted/updated?
-  - NFR
-    - Missed NFR, never talked about Availability, Consistency and Fault tolerance
-  - Never mentioned read or write heavy -> mention "READ > WRITE need to optimize this"
-  - 
-- Chars - a, A 0-9 => 10+26+26 = 62. So 62^n
-    - Find smallest n such that 62^n < total URL writes ( 365 billion )
-- How to make long hashed value short from sha/MD hash
-- Address if we are going to create a unique ID and assign it to column (id, short URL hash, long URL) or search just hash
--
-
-
-- Hashed value needs to shortened
+        - Chars allowed in hash
+          - Chars - a, A 0-9 => 10+26+26 = 62. So 62^n combinations possible
+        - Find smallest n such that 62^n < total URL writes ( 365 billion )
+    - URL deleted/updated?
+    - NFR
+      - Missed NFR, never talked about Availability, Consistency and Fault tolerance
+    - Never mentioned read or write heavy -> mention "READ > WRITE need to optimize this"
+- Problems/Critical part/Deep dives
+    - Address if we are going to create a unique ID and assign it to column (id, short URL hash, long URL) or search just hash
+    - How to make long hashed value short from sha/MD hash
+      - <details>
+            <summary>Hash Shortening</summary>
+            <img src="image/img_14.png" width="50%" alt="Hash Shortening">
+        </details>
+      - Hash + Collision resolution ( Hashed short URL needs to be verified if it exists in the system. Its costly process )
+        - So use Bloom filters(A bloom filter is a space-efficient probabilistic technique to test if an element is a member of a set).
+        - In case of collision 
+          - Chaining
+            - Not possible to store LL in DB
+          - Probing
+              - Or 32fz18 -> try next 32fz19 and so on.
+      - Base 62 conversion ( represent values based on 0-9, a-z, A-Z => 0-61 base)
+    - Redirection ( browser http status 302)
+    - Partitioning
+      - by range
+          - Shard based on hash/short URL first char. a-d, e-h, i-s, t-z. This will relatively work since key is already hashed and this will be evenly distributed.
+      - Consistent hashing for hash/short URL
+    - Lock rows when writing an entry(short and long URL)
+      - 1. Predicate locks to lock row that doesn't exist. (Costly but indexing short URL will make it faster)
+      - 2. Create all precomputed hashes and use them.
+    - Indexing types ( what engine to use)
+      - Since read heavy use B-Tree. ( Look [engine selection](Database.md#performance) )
+    - DB choice
+      - Single leader, partitioned and Btree based -> MySQL, Postgres
+      - Mongo DB could make an argument but above make sense considering the simple data model.
+    - Read speed
+      - Caching for hot links. Partitioning the cache by shortURL lead to fewer cache misses.
+        - Write ahead cache suitable option.
+        - LRU eviction
+    - Pastebin 
+      - Use S3 to store blob and everything else is same.
+      - Write will be 2 phase commit to store in MySQL/Postgres and S3. 
+    - Extras
+      - Analytics
+        - column for clicks ( address race condition without locks )
+        - Kafka. So use log based message broker to aggregate later (no need for DB or in memory message broker).
+        - Spark streaming with mini batch since no real time required.
+      - Delete expired jobs
+        - Use batch jobs with CRON
+- Mentions
+  - Monotonically increasing sequence is not a good idea since locking and indexing performance.
   - <details>
-        <summary>Hash Shortening</summary>
-        <img src="image/img_14.png" width="50%" alt="Hash Shortening">
+        <summary>Replication strategy</summary>
+        <img src="image/img_15.png" width="50%" alt="Replication strategy">
     </details>
-  - Hash + Collision resolution ( Hashed short URL needs to be verified if it exists in the system. Its costly process )
-    - So use Bloom filters(A bloom filter is a space-efficient probabilistic technique to test if an element is a member of a set).
-  - Base 62 conversion ( represent values based on 0-9, a-z, A-Z => 0-61 base)
-- Deep dives
-  - URL shortening
-  - URL Redirecting   
-  - 
-
+  
 ## Distributed Locking
 - What is fencing token? 
   - Use it to make sure only eligible node releasing the lock.
