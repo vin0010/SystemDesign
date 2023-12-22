@@ -1,5 +1,7 @@
 # Problems
 
+https://excalidraw.com/#json=430FBILICn5gUOHNEzWDw,ZLJ9la7U2IbLqVzNm26sSw
+
 |    | Problem                         | Attempted          | Confident | Key Concepts                                                        |
 |----|---------------------------------|--------------------|-----------|---------------------------------------------------------------------|
 | 1  | Distributed Metrics/Logging     | :x:                | :x:       | - Distributed Systems<br>- Logging<br>- Metrics<br>- Event Sourcing |
@@ -52,6 +54,7 @@
 - Apply discount on Nth order (https://leetcode.com/discuss/interview-question/system-design/459593/Facebook-or-System-Design-or-E-commerce-Apply-discount-on-every-nth-order)
 - Design Leaderboard ( Bharath )
 - Realtime gaming ranking (https://leetcode.com/discuss/interview-question/system-design/625918/Amazon-or-System-Design-or-Design-a-real-time-gaming-ranking-system)
+- Distributed counters
 - System to give prices of stack ( https://leetcode.com/discuss/interview-question/system-design/431712/Bloomberg-or-Design-a-system-to-give-prices-of-a-stock )
 - Design FigJam/Miro
 - Enterprise service bus (https://leetcode.com/discuss/interview-question/system-design/734303/Microsoftor-Design-an-Enterprise-Service-Bus)
@@ -74,8 +77,39 @@
     
   <details>
     <summary>Architecture</summary>
-    <img src="img.png" width="50%" alt="Architecture">
+    <img src="image/img.png" width="50%" alt="Architecture">
   </details>
+
+## 6. Tiny URL
+- Clarification and Estimation
+  - Clarification
+    - How long is the shortened URL? - Clarification
+        - If they as short as possible, we should define length to avoid collision.
+    - Chars allowed in hash
+  - URL deleted/updated?
+  - NFR
+    - Missed NFR, never talked about Availability, Consistency and Fault tolerance
+  - Never mentioned read or write heavy -> mention "READ > WRITE need to optimize this"
+  - 
+- Chars - a, A 0-9 => 10+26+26 = 62. So 62^n
+    - Find smallest n such that 62^n < total URL writes ( 365 billion )
+- How to make long hashed value short from sha/MD hash
+- Address if we are going to create a unique ID and assign it to column (id, short URL hash, long URL) or search just hash
+-
+
+
+- Hashed value needs to shortened
+  - <details>
+        <summary>Hash Shortening</summary>
+        <img src="image/img_14.png" width="50%" alt="Hash Shortening">
+    </details>
+  - Hash + Collision resolution ( Hashed short URL needs to be verified if it exists in the system. Its costly process )
+    - So use Bloom filters(A bloom filter is a space-efficient probabilistic technique to test if an element is a member of a set).
+  - Base 62 conversion ( represent values based on 0-9, a-z, A-Z => 0-61 base)
+- Deep dives
+  - URL shortening
+  - URL Redirecting   
+  - 
 
 ## Distributed Locking
 - What is fencing token? 
