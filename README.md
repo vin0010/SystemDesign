@@ -34,6 +34,7 @@
    2. Draw box diagrams with key components on the whiteboard or paper. This might include clients (mobile/web), APIs, web servers, data stores, cache, CDN, message queue, etc.
    3. If possible, go through a few concrete use cases. This will help you frame the high-level design. It is also likely that the use cases would help you discover edge cases you have not yet considered.
    4. API and schema ->  depends on the problem, for design google search engine not necessary, for multiplayer poker game, it makes sense.
+   5. LB/any node can be a single point of failure, point it out and suggest solution ( for LB active -passive LB, for services discovery mechanism etc.) 
 3. Design deep dive
    1. Had some initial ideas about areas to focus on in deep dive based on her feedback You shall work with the interviewer to identify and prioritize components in the architecture.
    2. Add more details to the system(look into news feed system diagram below)
@@ -50,7 +51,11 @@
 - High concurrency
 - Failure scenarios
 - After choosing database talk about indexing options
-- 
+- Game day
+- Failure scenarios
+- Disaster recovery
+- Geo Distribution
+- Lightweight serialization
 
 ### Dos
 - Always ask for clarification. Do not assume your assumption is correct. 
