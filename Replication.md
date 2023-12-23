@@ -1,0 +1,59 @@
+# Replication
+## Advantage
+- Reduce latency
+  - Region based replica for read
+- Fault tolerance
+## Disadvantage
+- Operational difficulties
+
+## Types
+- Single leader replication -> All write to once DB and reads from any (fast reads)
+    - One primary node (leader) handles all writes.
+    - Provides strong consistency.
+    - Common in relational databases.
+        - MySQL
+        - PostgreSQL
+        - MongoDB (primary-secondary mode)
+        - Cassandra (single-node write strategy)
+- Multiple leader replication -> All write goes to small group, read from any (fast writes, but inconsistent data)
+    - Multiple nodes can accept writes.
+    - Increased write availability and scalability.
+    - Requires conflict resolution mechanisms.
+    - Common in distributed databases.
+        - MongoDB (replica sets with multiple primaries)
+        - Cassandra (multi-node write strategy)
+        - Couchbase
+        - Amazon Aurora (Global Database)
+- Leaderless replication -> write to all, read to all. (slow read writes)
+    - No designated leader node.
+    - Writes can be distributed across any node.
+    - High availability and fault tolerance.
+    - Potential for eventual consistency.
+    - Common in NoSQL databases.
+        - DynamoDB
+        - Cassandra (peer-to-peer write strategy)
+        - Riak
+        - Voldemort
+- Key Considerations for Choosing Replication
+    - Consistency needs: Strong consistency (single leader), high availability with potential eventual consistency (multi-leader or leaderless)
+    - Write patterns: High write volume (multi-leader or leaderless), primarily reads (single leader)
+    - Availability requirements: High tolerance for failures (multi-leader or leaderless)
+    - Complexity: Simpler setup and management (single leader), more complex conflict resolution (multi-leader)
+    - Data model: Relational (single leader common), distributed (multi-leader or leaderless)
+- Replication lag : Time taken to sync all replicas with primary DB
+  - Cause inconsistent data at times.
+- How to handle data syncing during replication 
+- Solution (Performance Vs Consistency)
+    - Read after write consistency ( synchronous replication ) : Solves consistency problem
+        - Primary DB propagate write to all replicas as well and once acknowledged back from replicas, respond success to the call. Caller thas to wait till then.
+        - Slows down writes and performance. More replicas will slow things down. One replica failure to respond will fail the write operation itself.
+    - Asynchronous replication : Solves performance problem
+        - Primary DB propagate write to all replicas but don't wait for acknowledgement back.
+        - But if one replica fails to handle write, inconsistent state.
+        - Useful when inconsistencies are OK/updates take time.
+    - Hybrid approach
+        - Primary DB propagate write to all replicas, but wait for at least 1 ( this can be 2 or 3 but this is called quorum ) replica to acknowledge back
+  - How its implemented
+      - CDC ( Change data capture )
+          - Running JOB captures DB changes
+      - **TODO**
