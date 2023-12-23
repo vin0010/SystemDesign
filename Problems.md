@@ -5,7 +5,7 @@ https://excalidraw.com/#json=430FBILICn5gUOHNEzWDw,ZLJ9la7U2IbLqVzNm26sSw
 |    | Problem                         | Attempted          | Confident | Key Concepts                                                        |
 |----|---------------------------------|--------------------|-----------|---------------------------------------------------------------------|
 | 1  | Distributed Metrics/Logging     | :x:                | :x:       | - Distributed Systems<br>- Logging<br>- Metrics<br>- Event Sourcing |
-| 2  | Rate Limiter                    | :x:                | :x:       | - Rate Limiting<br>- Distributed Systems                            |
+| 2  | Rate Limiter                    | :white_check_mark: | :x:       | - Rate Limiting<br>- Distributed Systems                            |
 | 3  | Consistent Hashing              | :x:                | :x:       | - Hashing<br>- Consistent Hashing<br>- Distributed Systems          |
 | 4  | KV store                        | :x:                | :x:       | - Key-Value Store<br>- NoSQL Databases                              |
 | 5  | UID generator                   | :x:                | :x:       | - Unique Identifier<br>- Distributed Systems                        |
@@ -13,12 +13,12 @@ https://excalidraw.com/#json=430FBILICn5gUOHNEzWDw,ZLJ9la7U2IbLqVzNm26sSw
 | 7  | Web crawler                     | :x:                | :x:       | - Web Crawling<br>- Distributed Systems                             |
 | 8  | Notification System             | :x:                | :x:       | - Notifications<br>- Pub/Sub<br>- Distributed Systems               |
 | 9  | News feed system                | :x:                | :x:       | - News Feed<br>- Social Networks<br>- Algorithms                    |
-| 10 | Chat                            | :x:                | :x:       | - Real-time Messaging<br>- Websockets<br>- Pub/Sub                  |
+| 10 | Chat                            | :white_check_mark: | :x:       | - Real-time Messaging<br>- Websockets<br>- Pub/Sub                  |
 | 11 | Search autocomplete             | :x:                | :x:       | - Search Algorithms<br>- Autocomplete<br>- Data Structures          |
 | 12 | Youtube                         | :x:                | :x:       | - Video Streaming<br>- Content Delivery<br>- Recommendation Systems |
 | 13 | Drive                           | :x:                | :x:       | - File Storage<br>- Cloud Storage<br>- Distributed Systems          |
 | 14 | Swiggy/Doordash                 | :x:                | :x:       | - Food Delivery<br>- Geolocation<br>- Order Management              |
-| 15 | Kids safety                     | :x:                | :x:       | - Child Safety<br>- Parental Controls<br>- Monitoring               |
+| 15 | Kids safety                     | :white_check_mark: | :x:       | - Child Safety<br>- Parental Controls<br>- Monitoring               |
 | 16 | Proximity service               | :x:                | :x:       | - Proximity Detection<br>- Location-based Services                  |
 | 17 | Nearby friends                  | :x:                | :x:       | - Location Sharing<br>- Social Networks                             |
 | 18 | Google map                      | :x:                | :x:       | - Maps<br>- Geolocation<br>- Routing<br>- API                       |
@@ -61,7 +61,9 @@ https://excalidraw.com/#json=430FBILICn5gUOHNEzWDw,ZLJ9la7U2IbLqVzNm26sSw
 - 
 
 ## Tips
-- Don't talk anything about database during estimation and clarification
+- Database
+  - Don't talk anything about database during estimation and clarification
+  - Talk about engine selction for indexing type based on read or write heavy ([Engine selection for performance](Database.md#performance) )
 - 
 ## 1. Distributed Metrics/Logging
 - Use message broker
@@ -82,6 +84,48 @@ https://excalidraw.com/#json=430FBILICn5gUOHNEzWDw,ZLJ9la7U2IbLqVzNm26sSw
     <img src="image/img.png" width="50%" alt="Architecture">
   </details>
 
+## 2. Rate Limiter
+- Clarification
+  - Missed API key part
+  - Fixed window or Rolling window
+  - Assuming it's a separate service instead of application code. 
+- Requirements
+  - Missed NFR 
+    - Fault tolerance on rate limiters. 
+    - Super low latency since it's an over head on processing the request.  
+- API
+  - Missed endpoint_name in request 
+  - Missed time stamp. 
+- Estimation
+  - 1 million user
+  - rate limiting factor ( user id/ API key ) - 8 bytes
+  - 4 byte time stamp
+  - 4 byte counter
+  - 1mil * 16 -> 16 MB
+  - Memory shouldn't be a problem, still we can partition to improve speed and fault tolerance.
+- Design
+  - Fixed window
+    - Map with user id as key and tuple as value ()
+  - Rolling window
+    - Maintain list or sorted set for user in redis. ( treat it like linked list )
+      - Keep pushing the data and let the cron job delete state data
+    - Use small sized fix windows ( like batches )
+  - Cache some information in LB/API gateway to reduce load on rate limiting servers
+    - Use write back cache to sync with rate limiting services.
+    - High availability, ALl writes to go to same place -> Single leader replication
+  - Fault tolerance
+    - If master fails, we can restart with a little loss. if not we can go with lower consistency
+  - You can talk about algorithms
+    - Leaky bucket
+    - Token bucket
+- Database
+  - Partition on user id/IP/API key
+  - Partition on has above and use range based partition
+    
+  <details>
+    <summary>Rate Limiter Architecture</summary>
+    <img src="image/Rate_Limiter.png" width="50%" alt="Rate Limiter Architecture">
+  </details>
 ## 6. Tiny URL / Pastebin
 - Clarification and Estimation
   - Clarification
@@ -110,18 +154,19 @@ https://excalidraw.com/#json=430FBILICn5gUOHNEzWDw,ZLJ9la7U2IbLqVzNm26sSw
               - Or 32fz18 -> try next 32fz19 and so on.
       - Base 62 conversion ( represent values based on 0-9, a-z, A-Z => 0-61 base)
     - Redirection ( browser http status 302)
-    - Partitioning
-      - by range
-          - Shard based on hash/short URL first char. a-d, e-h, i-s, t-z. This will relatively work since key is already hashed and this will be evenly distributed.
-      - Consistent hashing for hash/short URL
-    - Lock rows when writing an entry(short and long URL)
-      - 1. Predicate locks to lock row that doesn't exist. (Costly but indexing short URL will make it faster)
-      - 2. Create all precomputed hashes and use them.
-    - Indexing types ( what engine to use)
-      - Since read heavy use B-Tree. ( Look [engine selection](Database.md#performance) )
-    - DB choice
-      - Single leader, partitioned and Btree based -> MySQL, Postgres
-      - Mongo DB could make an argument but above make sense considering the simple data model.
+    - Database
+      - Partitioning
+        - by range
+            - Shard based on hash/short URL first char. a-d, e-h, i-s, t-z. This will relatively work since key is already hashed and this will be evenly distributed.
+        - Consistent hashing for hash/short URL
+      - Lock rows when writing an entry(short and long URL)
+        - 1. Predicate locks to lock row that doesn't exist. (Costly but indexing short URL will make it faster)
+        - 2. Create all precomputed hashes and use them.
+      - Indexing types ( what engine to use)
+        - Since read heavy use B-Tree. ( Look [engine selection](Database.md#performance) )
+      - DB choice
+        - Single leader, partitioned and Btree based -> MySQL, Postgres
+        - Mongo DB could make an argument but above make sense considering the simple data model.
     - Read speed
       - Caching for hot links. Partitioning the cache by shortURL lead to fewer cache misses.
         - Write ahead cache suitable option.
@@ -136,13 +181,96 @@ https://excalidraw.com/#json=430FBILICn5gUOHNEzWDw,ZLJ9la7U2IbLqVzNm26sSw
         - Spark streaming with mini batch since no real time required.
       - Delete expired jobs
         - Use batch jobs with CRON
+    <details>
+        <summary>Tiny URL/PasteBin Architecture</summary>
+        <img src="image/TinyURL_Pastebin.png" width="50%" alt="Tiny URL/PasteBin Architecture">
+    </details>
 - Mentions
   - Monotonically increasing sequence is not a good idea since locking and indexing performance.
   - <details>
         <summary>Replication strategy</summary>
         <img src="image/img_15.png" width="50%" alt="Replication strategy">
     </details>
-  
+
+## 10. Chat/Messenger
+- Estimation
+  - 500 million users, 40 message per day
+  - 100 bytes per message
+  - 20 billion message per day
+  - 2TB storage per day
+  - 3.5PB storage per 5 years
+
+- Requirements
+  - Group chat
+  - Send and receive message in real time
+  - Keep old messages in DB
+- Design
+  - Database
+    - User
+    - Chats (chat id, time stamp etc)
+    - UserChat (userId, Chat ID) -> index both => to see list of chats.
+    - Message table (chat id, message, timestamp)
+    - NoSQL is best
+      - Ton of writes ( cassandra best for writes and schemaless)
+      - Cassandra uses leaderless replication
+  - Long polling not a good option since we need reset header every time. 
+  - When chat server goes down, we need to allocate different server to handle user connection.
+    - Reestablish handshake when a chat server goes down cause thundering herd problem. Might cause cascading failure. 
+  - Because of above reasons, server sent events are best since they reestablish connection when disconnect when websockets don't.
+  - For group messages
+    - No need for distributed transaction since they are not that important, and we can rely on eventual consistency since some of them might be offline.
+    - First need to upload message to DB and then distribute to all members or send concurrently also. 
+  - Ordering of messages
+    - Everyone see all the messages in same order or the order at which they are processed? 
+      - Use timestamp on the device that sent a message or timestamp on the server that receives the message?
+      - Timestamps are not perfect, but at least we can make it consistent
+- <details>
+      <summary>Chat Main Architecture</summary>
+      <img src="image/chat.png" width="50%" height="50%" alt="Chat Main Architecture">
+  </details>
+- <details>
+      <summary>Chat Architecture</summary>
+      <img src="image/chat_1.png" width="50%" height="50%" alt="Chat Architecture">
+      <img src="image/chat_2.png" width="50%" height="50%" alt="Chat Architecture">
+  </details>
+
+## 19. Distributed Message Queue
+- Check [Message Broker](Concepts.md#messaging)
+- Clarification
+  - Durable queue
+  - Push message
+  - Consume message (pull/push)
+  - Message
+    - Size limit? 
+    - Structured/Unstructured? 
+    - Media? 
+  - Consumer acknowledge mechanism
+  - Order of pushing and consuming same?
+  - How many producers and consumers?
+  - Message consumed by multiple consumer?
+- NFR
+  - High throughput / low latency
+  - Scalable
+  - Persistent
+- Estimation
+  - Sc
+- Design
+  - To achieve throughput
+    - Go with SSD or sequential disc access approach after defining message data structure
+    - Small I/O is a hurdle to achieve high throughput, so use mini batching. 
+  - Zookeeper to store list of partitions and its servers. 
+  - Storage
+    - Database (Message as SQL rows / NoSQL) / WAL ( write ahead logs ) which is basically a file with sequential access pattern to increase speed.
+    - WAL log files on disk is better choice.
+    - For metadata storage use zookeeper
+  - Routing layer between producer and broker to redirect to sharded broker
+  - Broker will be replicated with a single leader
+    - To guarantee durability, acknowledge back to producer only after all broker replicas persisted message. 
+  - Consumer pull vs Push model
+  - Coordinator to organize and discover consumers.
+  - Failure recovery
+    - When broker node crashes
+
 ## Distributed Locking
 - What is fencing token? 
   - Use it to make sure only eligible node releasing the lock.
@@ -192,3 +320,17 @@ https://excalidraw.com/#json=430FBILICn5gUOHNEzWDw,ZLJ9la7U2IbLqVzNm26sSw
     - Data partitioning and replication
     - Fault tolerance and consistency
     - Load balancing and scalability
+
+
+## Problems
+
+| Problem Description                       | Occurrence |
+|-------------------------------------------|------------|
+| Failed to mention NFR during requirements | 3          |
+| Missed to list all endpoints              | 2          |
+| Missed schema                             | 1          |
+| Mention LB type ( active-passive)         | 1          |
+| Failed to go through flow                 |            |
+|                                           |            |
+|                                           |            |
+|                                           |            |
