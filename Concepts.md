@@ -63,9 +63,28 @@ Concepts
 ## Messaging
 - For a system that receives more data than it can process, we can use Message Queue. Our data is persisted before being processed, Help decoupling.  
 - Message brokers and queues
+  - Topic
+    - Can be scaled by adding more partitions
+  - Partition is like buckets inside topic
+  - Broker
+    - Server that holds partitions that is called broker.
+    - Distribution of partitions across brokers is the key to high scalability
+  - <details>
+        <summary>Partition</summary>
+        <img src="image/kafka.png" width="50%" alt="Partition">
+    </details>
+  - <details>
+        <summary>Consumer Group</summary>
+        <img src="image/consumer_group.png" width="50%" alt="Consumer Group">
+    </details>
 - Message ordering and reliability
 - Event-driven architectures and systems
 - Publish-subscribe messaging patterns
+- With partition replication, when broker node crashes, leaders are replaced.
+- <details>
+      <summary>Broker Node recovery</summary>
+      <img src="image/broker_node_crashes.png" width="50%" alt="Broker Node recovery">
+  </details>
 
 ## Caching
 - In-memory cache (Redis, Memcached)
@@ -73,6 +92,15 @@ Concepts
 - Cache invalidation and consistency
 - Performance bottlenecks and optimization techniques
 - Load balancing and scalability considerations
+- Types
+  - Write-Back
+    - Faster writes: Changes are written only to the cache first.
+  - Write-Through
+    - Slower writes: Changes are written to both the cache and main memory simultaneously.
+    - Always consistent
+  - Write-Around
+    - Bypasses cache for writes: Data is written directly to main memory, skipping the cache.
+    - Less/eventual consistent
 
 - A cache is a temporary storage area that stores the result of expensive responses or frequently accessed data in memory so that subsequent requests are served more quickly.
 - The application performance is greatly affected by calling the database repeatedly. The cache can mitigate this problem.
@@ -104,6 +132,14 @@ Concepts
   - WebSocket
     - Unlike http, bidirectional communication
     - Connection established
+    - Once connection down, it won't automatically reestablish connection
+    - Connection initiated by client.
+    - It is bi-directional and persistent. It starts its life as a HTTP connection and could be “upgraded” via some well-defined handshake to a WebSocket connection.
+  - Long polling
+    - Need to set/reset header for every request
+  - Server sent events 
+    - Uni directional ( server to client )
+    - Once connection down, it automatically reestablishes connection.
 - Load balancers
   - Convey the type of load balancing ( Active passive etc )
   - Improves system availability
@@ -111,7 +147,7 @@ Concepts
   - The load balancer communicates with web servers through private IPs.
   - <details>
         <summary>Load Balancing Techniques</summary>
-        <img src="img_9.png" width="50%" alt="Load Balancing Techniques">
+        <img src="image/img_9.png" width="50%" alt="Load Balancing Techniques">
     </details>
 - Reverse proxies and request routing
 - Web sockets and real-time communication
@@ -170,7 +206,7 @@ Concepts
     - Coupling is allowed, Just decide on good or bad coupling.
     - <details>
         <summary>Common coupling(Avoid 2 services updating similar data to database)</summary>
-        <img src="img_10.png" width="50%" alt="Distributed Transaction">
+        <img src="image/img_10.png" width="50%" alt="Distributed Transaction">
       </details>
 
 ## Security and Reliability:
