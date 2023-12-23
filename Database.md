@@ -47,20 +47,14 @@
 
 <details>
   <summary>Types of Databases</summary>
-  <img src="img_8.png" alt="Types of Databases">
+  <img src="image/img_8.png" alt="Types of Databases">
 </details>
 
 - Non-relational databases might be the right choice if: • Your application requires super-low latency.
 - Your data are unstructured, or you do not have any relational data.
 - You only need to serialize and deserialize data (JSON, XML, YAML, etc.).
 - RDBMS
-  - Replication
-    - [Replication](Sharding.md#replication)
-    - Single leader replication -> All write to once DB and reads from any (fast reads)
-    - Multiple leader replication -> All write goes to small group, read from any (fast writes, but inconsistent data)
-    - Leaderless replication -> write to all, read to all. (slow read writes)
-    - How to handle data syncing during replication
-      - **TODO**
+  - [Replication](Replication.md)
   - Master/Slave
     - A master database generally only supports write operations. A slave database gets copies of the data from the master database and only supports read operations. All the data-modifying commands like insert, delete, or update must be sent to the master database. Most applications require a much higher ratio of reads to writes; thus, the number of slave databases in a system is usually larger than the number of master databases.
       - Advantages of database replication:
@@ -78,6 +72,10 @@
           - High cost
      - Horizontal scaling / Sharding
        - [Sharding](Sharding.md)
+  - Conflict Resolution (**TODO**)
+    - Straightforward in single node
+    - In Multi leader -> LWW
+    - In Leaderless -> 
   - RDBMS uses complex two-way locking mechanism to achieve correctness and maintain ACID property.
 - NoSQL
    - Instead of storing data in rows, we can store data in documents with IDs and I can store nested documents. We can store ton of data in this collection. 
@@ -102,7 +100,8 @@
        - Ideal for chat applications where chat ID is used to decide the shard and all of the messages are ordered by timestamp as sort key
        - Weakness - 
          - Conflict resolution ( last write wins)
-         - SLower reads
+         - Slower reads
+       - Designed to provide high availability and fault tolerance
      - RIAK
        - Key Value store 
        - Same as cassandra ( cassandra is wide column store )
@@ -117,6 +116,7 @@
        - No need to worry about write conflicts
        - Used column wide storage to store data. Helpful for column based locality. 
        - Useful for fast reads on columns. 
+       - Designed for strong consistency
      - MemCache and Redis
        - Key value stores
        - Implemented in memory
@@ -145,8 +145,16 @@
        - Large range scans of many records, so need to handle rollup and aggregation mechanism before if it make sense.
        - Write latest time entry only
        - Using time series DB is useful for read, write and data visualization
-    
-### Performance of Mysql
+   - #### Snapshot
+     - Is different from Replica.
+     - It is a snapshot of DB captured at a time.
+     - Useful when recovery after data loss. 
+### Performance
+  - How to choose Engine ( indexing )
+    - <details>
+        <summary>Indexing trade off</summary>
+        <img src="image/img_16.png" width="50%" alt="Indexing trade off">
+      </details>
 #### Concurrency
 - Pessimistic concurrency control vs Optimistic concurrency control
   - Database handle these locks in row level. If a single row is being concurrently handled by 1000s of queries, that's a really a bad design.
@@ -160,17 +168,17 @@
 - According to the CAP theorem, any distributed system needs to pick two out of the three properties. The three options are CA, CP, and AP. However, CA is not really a coherent option, as a system that is not partition-tolerant will be forced to give up either Consistency or Availability in the case of a network partition.
 - <details>
     <summary>CAP theorem</summary>
-    <img src="img_1.png" alt="CAP Theorem">
+    <img src="image/img_1.png" alt="CAP Theorem">
   </details>
 - <details>
     <summary>PACELC theorem</summary>
-    <img src="img_2.png" width="50%" alt="PACELC Theorem">
+    <img src="image/img_2.png" width="50%" alt="PACELC Theorem">
   </details>
 ### Distributed transactions ( Handle state changes in distributed systems )
 - Two difference service and respective databases, when you change state in 1 DB in 1 service, second also needs to be updated. 
 - <details>
     <summary>Distributed Transaction</summary>
-    <img src="img_3.png" width="50%" alt="Distributed Transaction">
+    <img src="image/img_3.png" width="50%" alt="Distributed Transaction">
   </details>
 - 1. Two phase commit ( orchestrator to locking/voting and commit both database rows)
   - Likely to cause Long living transactions in large database tables.
@@ -178,19 +186,19 @@
   - Backward recovery to undo steps/commits in different databses
     - <details>
         <summary>SAGA backward recovery</summary>
-        <img src="img_4.png" width="50%" alt="SAGA backward recovery">
+        <img src="image/img_4.png" width="50%" alt="SAGA backward recovery">
     </details>
   - Forward recovery is to retry failed steps, if it doesn't work undo.
 - Two ways to implement
   - a. Orchestrator
     - <details>
         <summary>Orchestrator approach</summary>
-        <img src="img_5.png" width="50%" alt="Orchestrator approach">
+        <img src="image/img_5.png" width="50%" alt="Orchestrator approach">
     </details>
   - b. Choreography ( event based actions from services )
     - <details>
       <summary>Choreography approach</summary>
-      <img src="img_6.png" width="50%" alt="Choreography approach">
+      <img src="image/img_6.png" width="50%" alt="Choreography approach">
     </details>
     - Hard to find where is the problem.
     - Use correlation id (trace id) to track it down.
