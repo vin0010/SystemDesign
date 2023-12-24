@@ -193,7 +193,6 @@ https://excalidraw.com/#json=430FBILICn5gUOHNEzWDw,ZLJ9la7U2IbLqVzNm26sSw
         <summary>Replication strategy</summary>
         <img src="image/img_15.png" width="50%" alt="Replication strategy">
     </details>
-
 ## 10. Chat/Messenger
 - Estimation
   - 500 million users, 40 message per day
@@ -250,6 +249,8 @@ https://excalidraw.com/#json=430FBILICn5gUOHNEzWDw,ZLJ9la7U2IbLqVzNm26sSw
   - Order of pushing and consuming same?
   - How many producers and consumers?
   - Message consumed by multiple consumer?
+  - Delivery semantics
+    - At most once, at least once, exactly once
 - NFR
   - High throughput / low latency
   - Scalable
@@ -271,7 +272,79 @@ https://excalidraw.com/#json=430FBILICn5gUOHNEzWDw,ZLJ9la7U2IbLqVzNm26sSw
   - Consumer pull vs Push model
   - Coordinator to organize and discover consumers.
   - Failure recovery
-    - When broker node crashes
+    - When broker node crashes, look [Message Broker](Concepts.md#messaging)
+  - Increase/Decrease paritions
+  - Delivery semantics
+    - At most once, at least once, exactly once
+      - Send `ACK=1` or `ACK=all` with request(possibly as a header) to handle it in queue.
+      - Exactly once is difficult and expensive.  
+  - Message filtering
+    - Add tags with messages.
+    - Consumers can subscribe to tags with broker.
+    - Tag filter that sits in broker serve accordingly. 
+  - <details>
+        <summary>Message broker flow</summary>
+        <img src="image/message_broker.png" width="50%" alt="Message broker flow">
+    </details>
+  - <details>
+        <summary>Architecture</summary>
+        <img src="image/message_broker_architecture.png" width="50%" alt="Architecture">
+    </details>
+## 21. Ad click event aggregation
+- Clarification
+  - Ad click events as input
+    - File/Stream/APIs
+  - Supported queries
+    - ad clicks for an ad in last M minutes/time range
+    - Top 100 clicked ads in last 1/M minutes
+    - Support filtering by ad_id, country and category
+  - NFR
+    - Highly available
+    - Accuracy ( strong consistency)
+    - Fault tolerance
+    - Deduplication of events
+- Estimation
+  - 1 Billion ad clicks, 2 million ads
+  - QPS = 10^9/10^5 sec = 10000 clicks per second
+  - Peak QPS = 5x10000 = 50000
+- APIs
+  - GET /clicks/{id} (ad_id, TimeRange)
+  - GET /clicks/top (TimeRange)
+  - GET /clicks (Filters)
+- Design
+  - Data
+    - Raw data 
+      - ad_id, timestamp, region, user_id, ip
+      - Not going to be queried
+      - write heavy
+    - Aggregated data
+      - ad_id, minute_in_long, count, filter_id (multiple ad_id can exist to fast filtering)
+      - filter_id, region, ip, user_id
+      - will be queried
+      - read heavy
+  - Database
+    - Cassandra ( time series ) / TimeScale DB
+      - Fast write since it uses LSM tree + SS table for indexing
+      - Multi leader/leaderless replication 9 (but in this case, we can go for sharded single leader approach for ad metrics and for topK we can have a separate shard.)
+      - Easy to handle with irrelevant data 
+  - Aggregation service
+    - Apache Flink
+      - Uses sliding window approach to calculate data for streams 
+    - Map reduce ( distributed by moving ad_id % size to respective nodes )
+    - <details>
+        <summary>Aggregation of events by Map reduce</summary>
+        <img src="image/ad_event_aggregation_map_reduce.png" width="50%" alt="Aggregation of events by Map reduce">
+      </details>
+  - <details>
+      <summary>Architecture</summary>
+      <img src="image/ad_event_aggregation_architecture.png" width="50%" alt="Architecture">
+    </details>
+- Clarification
+- Estimation
+- APIs
+- Design
+## 25. Payment system
+## 22. Hotel reservation system
 
 ## Distributed Locking
 - What is fencing token? 
