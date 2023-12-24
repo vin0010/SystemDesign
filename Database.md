@@ -111,7 +111,7 @@
        - Same as cassandra ( cassandra is wide column store )
        - Use CRDTS(conflict free replicated data types) in order to deal with conflict resolution
        - Aggregating conflicting writes and process them
-       - Handy when dealing with counters and sets in multi leader or leaderless replication 
+       - Handy when dealing with counters and sets in multi leader or leaderless replication
        - eventually consistent
      - Apache Hbase
        - Wide column as cassandra
@@ -163,7 +163,10 @@
 - Pessimistic concurrency control vs Optimistic concurrency control
   - Database handle these locks in row level. If a single row is being concurrently handled by 1000s of queries, that's a really a bad design.
   - If data access conflicts are very rare, go with optimistic or use pessimistic. 
-  - In pessimistic, locks are used. 
+  - In pessimistic, locks are used.
+- Optimistic concurrency control
+  - new column called version added to DB and it's updated along with commit and next commit will fail since the version number is different.
+  - Faster compared to pessimistic concurrency. 
 
 ### CAP theorem
 - Consistency : All nodes in the partition has the data at same time. 
