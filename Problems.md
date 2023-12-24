@@ -346,6 +346,32 @@ https://excalidraw.com/#json=430FBILICn5gUOHNEzWDw,ZLJ9la7U2IbLqVzNm26sSw
 ## 25. Payment system
 ## 22. Hotel reservation system
 
+- Design
+  - APIs
+    - Hotel service
+    - Booking service
+    - Hotel Management service
+    - Rate Service
+    - Payment Service
+    - Guest/User service
+  - Database
+    - Considering the relations between tables and need for ACID, SQL is best
+    - No need to assign room at the time of booking, keeping a inventory count in booking is best for performance. 
+    - Table
+      - Hotel
+        - Room
+        - Hotel
+      - Booking
+        - booking
+        - inventory
+          - room_type_id
+          - date
+          - total_slots
+          - booked_slots
+    - Concurrency
+      - Locking mechanism
+    - Scaling
+      - Shard based on hotel_id
 ## Distributed Locking
 - What is fencing token? 
   - Use it to make sure only eligible node releasing the lock.
