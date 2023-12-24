@@ -169,6 +169,7 @@ Concepts
   - Flink consumer
      - Can keep a copy of local table so join with every message to move it to respective sub table/partition
      - Can handle messages in real time
+     - Comes with stateful computation for handling deduplication 
   - Spark streaming consumer
      - can keep a copy of local table so join with every message to move it to respective sub table/partition
      - Can handle messages in mini batches.
