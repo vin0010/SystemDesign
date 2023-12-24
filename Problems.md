@@ -64,7 +64,9 @@ https://excalidraw.com/#json=430FBILICn5gUOHNEzWDw,ZLJ9la7U2IbLqVzNm26sSw
 - Database
   - Don't talk anything about database during estimation and clarification
   - Talk about engine selction for indexing type based on read or write heavy ([Engine selection for performance](Database.md#performance) )
-- 
+- When pitching async design or event driven system
+  - The design we currently have is synchronous. This is not enough because the capacity of consumers and producers are not always equal. If there is a sudden increase in traffic, we can expect more latency. 
+  - We can adopt message queue to decouple consumers and producers and scale up or down when needed.
 ## 1. Distributed Metrics/Logging
 - Use message broker
   - In memory message broker Vs Log based message broker
