@@ -234,7 +234,6 @@ https://excalidraw.com/#json=430FBILICn5gUOHNEzWDw,ZLJ9la7U2IbLqVzNm26sSw
       <img src="image/chat_1.png" width="50%" height="50%" alt="Chat Architecture">
       <img src="image/chat_2.png" width="50%" height="50%" alt="Chat Architecture">
   </details>
-
 ## 19. Distributed Message Queue
 - Check [Message Broker](Concepts.md#messaging)
 - Clarification
