@@ -29,10 +29,12 @@
 
 ### Questions
 - Decide DB based on 
-- Data access patterns
-  - Read/write ratio
-- Need ACID?
-- Structured/Unstructured data?
+  - Data access patterns
+    - Read/write ratio
+  - Need ACID?
+  - Structured/Unstructured data?
+  - Transaction support needed? 
+  - 
 
 > Consistency make database harder to scale.
 
@@ -102,7 +104,9 @@
          - Conflict resolution ( last write wins)
          - Slower reads
        - Designed to provide high availability and fault tolerance
+       - Not specifically designed for time series data but can handle it efficiently.
      - RIAK
+       - Distributed NoSQL database optimized for time series data.
        - Key Value store 
        - Same as cassandra ( cassandra is wide column store )
        - Use CRDTS(conflict free replicated data types) in order to deal with conflict resolution
