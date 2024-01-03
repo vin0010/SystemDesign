@@ -2,36 +2,62 @@
 
 https://excalidraw.com/#json=430FBILICn5gUOHNEzWDw,ZLJ9la7U2IbLqVzNm26sSw
 
-|    | Problem                         | Attempted           | Confident | Key Concepts                                                        |
-|----|---------------------------------|---------------------|-----------|---------------------------------------------------------------------|
-| 1  | Distributed Metrics/Logging     | :x:                 | :x:       | - Distributed Systems<br>- Logging<br>- Metrics<br>- Event Sourcing |
-| 2  | Rate Limiter                    | :white_check_mark:  | :x:       | - Rate Limiting<br>- Distributed Systems                            |
-| 3  | Consistent Hashing              | :x:                 | :x:       | - Hashing<br>- Consistent Hashing<br>- Distributed Systems          |
-| 4  | KV store                        | :x:                 | :x:       | - Key-Value Store<br>- NoSQL Databases                              |
-| 5  | UID generator                   | :x:                 | :x:       | - Unique Identifier<br>- Distributed Systems                        |
-| 6  | URL shortener                   | :white_check_mark:  | :x:       | - URL Shortening<br>- Hashing<br>- Redirects                        |
-| 7  | Web crawler                     | :x:                 | :x:       | - Web Crawling<br>- Distributed Systems                             |
-| 8  | Notification System             | :x:                 | :x:       | - Notifications<br>- Pub/Sub<br>- Distributed Systems               |
-| 9  | News feed system                | :x:                 | :x:       | - News Feed<br>- Social Networks<br>- Algorithms                    |
-| 10 | Chat                            | :white_check_mark:  | :x:       | - Real-time Messaging<br>- Websockets<br>- Pub/Sub                  |
-| 11 | Search autocomplete             | :x:                 | :x:       | - Search Algorithms<br>- Autocomplete<br>- Data Structures          |
-| 12 | Youtube                         | :x:                 | :x:       | - Video Streaming<br>- Content Delivery<br>- Recommendation Systems |
-| 13 | Drive                           | :x:                 | :x:       | - File Storage<br>- Cloud Storage<br>- Distributed Systems          |
-| 14 | Swiggy/Doordash                 | :white_check_mark:  | :x:       | - Food Delivery<br>- Geolocation<br>- Order Management              |
-| 15 | Kids safety                     | :white_check_mark:  | :x:       | - Child Safety<br>- Parental Controls<br>- Monitoring               |
-| 16 | Proximity service               | :x:                 | :x:       | - Proximity Detection<br>- Location-based Services                  |
-| 17 | Nearby friends                  | :x:                 | :x:       | - Location Sharing<br>- Social Networks                             |
-| 18 | Google map                      | :x:                 | :x:       | - Maps<br>- Geolocation<br>- Routing<br>- API                       |
-| 19 | Distributed Message Queue       | :white_check_mark:  | :x:       | - Message Queues<br>- Pub/Sub<br>- Distributed Systems              |
-| 20 | Metrics Monitoring and alerting | :x:                 | :x:       | - Monitoring<br>- Alerting<br>- Distributed Systems                 |
-| 21 | Ad click event aggregation      | :white_check_mark:  | :x:       | - Ad Tech<br>- Event Aggregation<br>- Analytics                     |
-| 22 | Hotel reservation               | :x:                 | :x:       | - Reservation Systems<br>- Booking Platforms                        |
-| 23 | Distributed Email service       | :x:                 | :x:       | - Email<br>- SMTP<br>- Distributed Systems                          |
-| 24 | S3 like blob storage            | :x:                 | :x:       | - Object Storage<br>- AWS S3<br>- Distributed Systems               |
-| 25 | Payment                         | :x:                 | :x:       | - Payment Gateways<br>- Transactions<br>- Financial Systems         |
-| 26 | Digital wallet                  | :x:                 | :x:       | - Digital Payments<br>- Wallets<br>- Cryptocurrency                 |
-| 27 | Stock exchange                  | :x:                 | :x:       | - Stock Trading<br>- Financial Markets<br>- Exchange Platforms      |
-| 28 | Job Scheduler                   | :white_check_mark:  |           |                                                                     |
+> v: ﻿Standard questions around challenging projects, conflicts, strengths, time i had to convince other team to make changes etc. I felt that this round went good.
+> 
+## Main list
+- Ad click aggregation system
+- Top 10 songs played on spotify (top-k problem)
+- Design web crawler
+- Design online chess
+- Design whatsapp
+- Design price alert system similar to camelcamelcamel.com
+- Design proximity server.
+- Design a system to store images for FB and insta that would require 1000 uploads per sec and handle duplication.
+  Design YouTube
+  Design the Facebook post privacy functionality. In other words, if I make a Facebook post, and I have 3 privacy options to choose from (Only Me, Friends Only, Public), design how wold you get the visibility for any Faceook user (ie. can a FB user see the post or not)
+  Design an online judge like leetcode
+- Video count in distributed system.
+  2.Design Ticketmaster.
+  More focus on:
+  Ticket booking workflows
+  What if tickets are not available?
+- design netflix
+  design yelp
+  design messenger status
+- Google drive
+-  Ad count aggregation system (picked product architecture, but ran very similar to typical system design question). Provided both live data case and accurate data case with both CMS and persistent data storage. honestly I am not sure about this round.
+  - Count min sketch
+
+|    | Problem                         | Attempted          | Confident | Key Concepts                                                        |
+|----|---------------------------------|--------------------|-----------|---------------------------------------------------------------------|
+| 1  | Distributed Metrics/Logging     | :x:                | :x:       | - Distributed Systems<br>- Logging<br>- Metrics<br>- Event Sourcing |
+| 2  | Rate Limiter                    | :white_check_mark: | :x:       | - Rate Limiting<br>- Distributed Systems                            |
+| 3  | Consistent Hashing              | :x:                | :x:       | - Hashing<br>- Consistent Hashing<br>- Distributed Systems          |
+| 4  | KV store                        | :x:                | :x:       | - Key-Value Store<br>- NoSQL Databases                              |
+| 5  | UID generator                   | :x:                | :x:       | - Unique Identifier<br>- Distributed Systems                        |
+| 6  | URL shortener                   | :white_check_mark: | :x:       | - URL Shortening<br>- Hashing<br>- Redirects                        |
+| 7  | Web crawler                     | :white_check_mark: | :x:       | - Web Crawling<br>- Distributed Systems                             |
+| 8  | Notification System             | :white_check_mark: | :x:       | - Notifications<br>- Pub/Sub<br>- Distributed Systems               |
+| 9  | News feed system                | :white_check_mark: | :x:       | - News Feed<br>- Social Networks<br>- Algorithms                    |
+| 10 | Chat                            | :white_check_mark: | :x:       | - Real-time Messaging<br>- Websockets<br>- Pub/Sub                  |
+| 11 | Search autocomplete             | :x:                | :x:       | - Search Algorithms<br>- Autocomplete<br>- Data Structures          |
+| 12 | Youtube                         | :x:                | :x:       | - Video Streaming<br>- Content Delivery<br>- Recommendation Systems |
+| 13 | Drive                           | :white_check_mark: | :x:       | - File Storage<br>- Cloud Storage<br>- Distributed Systems          |
+| 14 | Swiggy/Doordash                 | :white_check_mark: | :x:       | - Food Delivery<br>- Geolocation<br>- Order Management              |
+| 15 | Kids safety                     | :white_check_mark: | :x:       | - Child Safety<br>- Parental Controls<br>- Monitoring               |
+| 16 | Proximity service               | :x:                | :x:       | - Proximity Detection<br>- Location-based Services                  |
+| 17 | Nearby friends                  | :x:                | :x:       | - Location Sharing<br>- Social Networks                             |
+| 18 | Google map                      | :x:                | :x:       | - Maps<br>- Geolocation<br>- Routing<br>- API                       |
+| 19 | Distributed Message Queue       | :white_check_mark: | :x:       | - Message Queues<br>- Pub/Sub<br>- Distributed Systems              |
+| 20 | Metrics Monitoring and alerting | :x:                | :x:       | - Monitoring<br>- Alerting<br>- Distributed Systems                 |
+| 21 | Ad click event aggregation      | :white_check_mark: | :x:       | - Ad Tech<br>- Event Aggregation<br>- Analytics                     |
+| 22 | Hotel reservation               | :white_check_mark: | :x:       | - Reservation Systems<br>- Booking Platforms                        |
+| 23 | Distributed Email service       | :x:                | :x:       | - Email<br>- SMTP<br>- Distributed Systems                          |
+| 24 | S3 like blob storage            | :x:                | :x:       | - Object Storage<br>- AWS S3<br>- Distributed Systems               |
+| 25 | Payment                         | :white_check_mark: | :x:       | - Payment Gateways<br>- Transactions<br>- Financial Systems         |
+| 26 | Digital wallet                  | :x:                | :x:       | - Digital Payments<br>- Wallets<br>- Cryptocurrency                 |
+| 27 | Stock exchange                  | :x:                | :x:       | - Stock Trading<br>- Financial Markets<br>- Exchange Platforms      |
+| 28 | Job Scheduler                   | :white_check_mark: | :x:       |                                                                     |
 
 
 ## Problems from Leetcode
@@ -61,12 +87,24 @@ https://excalidraw.com/#json=430FBILICn5gUOHNEzWDw,ZLJ9la7U2IbLqVzNm26sSw
 - 
 
 ## Tips
+- Clarification
+  - If the problem is too big, get the feedback on what I have to focus. 
+  - Make sure to check if interviewer can follow you up.
+  - Make sure to check if you are going in the right direction. 
 - Database
-  - Don't talk anything about database during estimation and clarification
-  - Talk about engine selction for indexing type based on read or write heavy ([Engine selection for performance](Database.md#performance) )
+  - Don't talk anything about database during estimation, clarification and initial design
+  - Talk about engine selection for indexing type based on read or write heavy ([Engine selection for performance](Database.md#performance) )
 - When pitching async design or event driven system
   - The design we currently have is synchronous. This is not enough because the capacity of consumers and producers are not always equal. If there is a sudden increase in traffic, we can expect more latency. 
   - We can adopt message queue to decouple consumers and producers and scale up or down when needed.
+- Non functional requirements (NFR)
+  - Propose NFR for service level. 
+    - Example in hotel booking,
+      - Booking -> consistency(to handle race condition adn duplicate booking)
+      - Search -> Scalability and availability
+- Design
+  - Initially draw boxes, don't focus on design.
+  - 
 ## 1. Distributed Metrics/Logging
 - Use message broker
   - In memory message broker Vs Log based message broker
@@ -193,6 +231,213 @@ https://excalidraw.com/#json=430FBILICn5gUOHNEzWDw,ZLJ9la7U2IbLqVzNm26sSw
         <summary>Replication strategy</summary>
         <img src="image/img_15.png" width="50%" alt="Replication strategy">
     </details>
+## Web Crawler
+  - Requirement
+    - Given a set of URLs, download all the web pages addressed by the URLs.
+    - Extract URLs
+    - Add new URLs to the download list.
+  - Clarification
+    - Content type
+    - Raw data storage required? 
+    - Do we need to handle duplication?
+    - How frequently we need to check for updates 
+      - Manage frequent updates/low frequent updates. 
+  - NFR
+    - Scalability
+    - Robustness ( broken links, malicious links, corrupt html, server errors, crashes etc.)
+    - Politeness - Don't put too much load into the servers, controlled crawling. 
+    - Extensibility ( to support new file formats in future)
+  - Estimation
+    - Pages per month
+    - QPS
+    - Peak QPS
+    
+  - High level Design
+    - <details>
+        <summary>Architecture</summary>
+        <img src="image/crawler_1.png" width="50%" alt="Architecture">
+      </details>
+  - Deep dive
+    - BFS vs DFS
+    - BFS is best and have separate queue for group of URLs based on consistent hashing
+    - Prioritizer on top of queue to fetch most important page to be crawled first. 
+    - Detect and avoid problematic content
+    - Robustness
+      - Retry
+    - Robot exclusion protocol ( robots.txt)
+    - Distribute crawls
+    - Cache DNS resolver since it's a bottleneck for crawlers
+    - Geo routing of crawl request to crawlers to fetch from nearby IP.
+    - <details>
+        <summary>Architecture</summary>
+        <img src="image/crawler_2.png" width="50%" alt="Architecture">
+      </details>
+    - Ignore uselss data in content parser (ads, spam urls etc)
+## 8. Notification System
+- Requirements
+  - Type of notifications
+    - Push, sms and email
+  - Real time? 
+    - Ideally these systems are soft real time, as soon as possible with slight delay when systems are on load
+  - What triggers them? 
+    - Client applications and scheduled on server sides. 
+  - User opting out
+  - Group pushing events. 
+  - Priority.
+- Clarification
+- Estimation
+  - Notifications per day
+- High level design
+  - Cache user info, device info and notification templates. 
+- Deep dive
+  - Group pushes, batch processing. 
+  - Prevent data loss
+  - System failures
+  - Maintain notification log.
+  - Receive notification only once. 
+  - Retry 
+- Architecture
+  - Don't forget to maintain notification log.
+    - To understand common failure pattern for analytics.
+    - Possibly in push notification, we can track user patterns as well. 
+  - 
+  - <details>
+      <summary>Architecture</summary>
+      <img src="image/notification_1.png" width="50%" alt="Architecture">
+    </details>
+  - <details>
+      <summary>Architecture</summary>
+      <img src="image/notification_2.png" width="50%" alt="Architecture">
+    </details>
+  - <details>
+      <summary>Architecture</summary>
+      <img src="image/notification_3.png" width="50%" alt="Architecture">
+    </details>
+  - <details>
+      <summary>Architecture</summary>
+      <img src="image/notification_4.png" width="50%" alt="Architecture">
+    </details>
+  - <details>
+      <summary>Final Design</summary>
+      <img src="image/notification_5.png" width="50%" alt="Architecture">
+    </details>
+## 9. News Feed System
+- Requirements
+- Clarification
+- Estimation
+- High level design
+- Deep dive
+  - Fanout service
+    - Fanout on write
+      - When news/post written, its pushed to friends cache immediately. 
+      -  Feels real time and fast. But Resource intensive(especially when user has many friends and user is not going to read i immediately)
+      - Little lazy loading can be better based on user activity.
+    - Fanout on read
+      - News feed computed on read and  
+      - Best for inactive users
+    - Hybrid approach is better based on activity history/pattern 
+
+- Architecture
+ - <details>
+      <summary>Final Design</summary>
+      <img src="image/newsfeed_highlevel.png" width="50%" alt="Architecture">
+    </details>
+ - <details>
+      <summary>Final Design</summary>
+      <img src="image/newsfeed_cache_system.png" width="50%" alt="Architecture">
+    </details>
+## 12. Youtube
+- Requirements
+  - Watch videos
+  - Upload videos
+    - Encryption?
+    - Size?
+  - Like/Dislike
+  - Playlists? 
+- Clarification
+- NFR
+  - Watching
+    - Availability
+  - Upload
+    - Availability
+    - Integrity and Durability
+- Estimation
+  - DAU
+  - Average time spent per user
+  - 
+- High level design
+  - Everything else except viodeo streaming goes through API servers. 
+- Deep dive
+  - Geo distribution is important
+  - CDN is important
+- Architecture
+## 13. Drive/Google Drive/Box
+- Requirements
+  - Files supported
+    - Files need to be encrypted?
+    - Size limit
+  - Users
+  - Average users storage
+  - File versioning
+  - Share
+  - File preview
+  - Search?
+  - NFR
+    - Durability ( replication and geo distribution )
+    - Availability
+    - Scalability
+    - Data integrity
+- Clarification
+
+- Estimation
+- High level design
+  - 1:1 read/write ratio
+  - Block servers
+    - To upload data by blocks in BD.
+    - Use checksum or hash to verify data integrity
+    - Split compress, encrypt order and store data
+- Deep dive
+  - Upload
+    - Simple upload for smaller files
+    - Resumable upload for really large files.
+    - Maintain size
+    - Sync conflicts on shared drives.
+    - Write metadata and then upload file.
+- Architecture
+- <details>
+    <summary>Region replication</summary>
+    <img src="image/drive_metadata_db.png" width="50%">
+  </details>
+- <details>
+    <summary>Region replication</summary>
+    <img src="image/drive_region_replication.png" width="50%">
+  </details>
+- <details>
+    <summary>High Level Design</summary>
+    <img src="image/drive_high_level_design.png" width="50%" alt="Architecture">
+  </details>
+- <details>
+    <summary>Final Design</summary>
+    <img src="image/.png" width="50%" alt="Architecture">
+  </details>
+
+## Dummy
+- Requirements
+- Clarification
+- NFR
+- Estimation
+- High level design
+- Deep dive
+- Architecture
+
+## Dummy
+- Requirements
+- Clarification
+- Estimation
+- High level design
+- Deep dive
+- Architecture
+
 ## 10. Chat/Messenger
 - Estimation
   - 500 million users, 40 message per day
@@ -344,7 +589,6 @@ https://excalidraw.com/#json=430FBILICn5gUOHNEzWDw,ZLJ9la7U2IbLqVzNm26sSw
 - Design
 ## 25. Payment system
 ## 22. Hotel reservation system
-
 - Design
   - APIs
     - Hotel service
@@ -355,7 +599,7 @@ https://excalidraw.com/#json=430FBILICn5gUOHNEzWDw,ZLJ9la7U2IbLqVzNm26sSw
     - Guest/User service
   - Database
     - Considering the relations between tables and need for ACID, SQL is best
-    - No need to assign room at the time of booking, keeping a inventory count in booking is best for performance. 
+    - No need to assign room at the time of booking, keeping an inventory count in booking is best for performance. 
     - Table
       - Hotel
         - Room
@@ -371,6 +615,15 @@ https://excalidraw.com/#json=430FBILICn5gUOHNEzWDw,ZLJ9la7U2IbLqVzNm26sSw
       - Locking mechanism
     - Scaling
       - Shard based on hotel_id
+- Architecure
+  - <details>
+      <summary>Sharding</summary>
+      <img src="image/reservation_sharding.png" width="50%" alt="Sharding">
+    </details>
+  - <details>
+      <summary>Architecture</summary>
+      <img src="image/reservation_highlevel.png" width="50%" alt="Architecture">
+    </details>
 ## Distributed Locking
 - What is fencing token? 
   - Use it to make sure only eligible node releasing the lock.

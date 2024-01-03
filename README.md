@@ -19,6 +19,8 @@
    3. If the interviewer ask you to make assumptions, write down assumptions
    4. Check if you need back of the end envelope
       - 1 Million req per day = 12 rps
+      - 1 Billion rp month = 400 rps
+      - 1 Billion rp day = 400*30 rps
       - Numbers
         - 1 Million - 10^6
         - 1 Billion - 10^9
@@ -28,7 +30,7 @@
         - 1KB - 1024 Bytes
         - 1MB - 1024 KB
         - 1GB - 1024 MB
-        - 
+        - 1 Billion KB = 1TB
 2. Propose high-level design and get buy-in
    1. Come up with an initial blueprint for the design. Ask for feedback. Treat your interviewer as a teammate and work together. Many good interviewers love to talk and get involved.
    2. Draw box diagrams with key components on the whiteboard or paper. This might include clients (mobile/web), APIs, web servers, data stores, cache, CDN, message queue, etc.
