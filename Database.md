@@ -125,10 +125,12 @@
        - Key value stores
        - Implemented in memory
        - Redis rich feature set-> geo sharding, sorted sets, 
+         - Sorted set implemented using hash table and skip list.
        - Built using hashmap internally. 
        - Worse for range queries
        - Useful small data sets since in memory
-       - Useful in geo spatial index in uber and swiggy, constantly update driver locations. 
+       - Useful in geo spatial index in uber and swiggy, constantly update driver locations.
+          
      - Neo4j
        - Graph databse
        - We can use Graph in SQL with many to many relationships but very slow. 

@@ -5,28 +5,6 @@ https://excalidraw.com/#json=430FBILICn5gUOHNEzWDw,ZLJ9la7U2IbLqVzNm26sSw
 > v: ﻿Standard questions around challenging projects, conflicts, strengths, time i had to convince other team to make changes etc. I felt that this round went good.
 > 
 ## Main list
-- Ad click aggregation system
-- Top 10 songs played on spotify (top-k problem)
-- Design web crawler
-- Design online chess
-- Design whatsapp
-- Design price alert system similar to camelcamelcamel.com
-- Design proximity server.
-- Design a system to store images for FB and insta that would require 1000 uploads per sec and handle duplication.
-  Design YouTube
-  Design the Facebook post privacy functionality. In other words, if I make a Facebook post, and I have 3 privacy options to choose from (Only Me, Friends Only, Public), design how wold you get the visibility for any Faceook user (ie. can a FB user see the post or not)
-  Design an online judge like leetcode
-- Video count in distributed system.
-  2.Design Ticketmaster.
-  More focus on:
-  Ticket booking workflows
-  What if tickets are not available?
-- design netflix
-  design yelp
-  design messenger status
-- Google drive
--  Ad count aggregation system (picked product architecture, but ran very similar to typical system design question). Provided both live data case and accurate data case with both CMS and persistent data storage. honestly I am not sure about this round.
-  - Count min sketch
 
 |    | Problem                         | Attempted          | Confident | Key Concepts                                                        |
 |----|---------------------------------|--------------------|-----------|---------------------------------------------------------------------|
@@ -60,21 +38,29 @@ https://excalidraw.com/#json=430FBILICn5gUOHNEzWDw,ZLJ9la7U2IbLqVzNm26sSw
 | 28 | Job Scheduler                   | :white_check_mark: | :x:       |                                                                     |
 
 
+
 ## Problems from Leetcode
-- Ad click aggregation system 
-- Top 10 songs played on spotify (top-k problem)
-- Design web crawler 
-- Deisgn online chess 
-- Design whatsapp 
-- Design price alert system similar to camelcamelcamel.com
-- Design proximity server.
-- Design the Facebook post privacy functionality. In other words, if I make a Facebook post, and I have 3 privacy options to choose from (Only Me, Friends Only, Public), design how would you get the visibility for any Faceook user (ie. can a FB user see the post or not)
-- Design an online judge like leetcode
-- Netflix
-- Yelp
-- Ticketmaster
+-[ ] Design web crawler
+-[ ] Design online chess
+-[ ] Design whatsapp
+-[ ] Design price alert system similar to camelcamelcamel.com
+-[ ] Design proximity server.
+-[ ] Design a system to store images for FB and insta that would require 1000 uploads per sec and handle duplication. 
+-[ ] Design YouTube 
+-[ ] Design the Facebook post privacy functionality. In other words, if I make a Facebook post, and I have 3 privacy options to choose from (Only Me, Friends Only, Public), design how wold you get the visibility for any Faceook user (ie. can a FB user see the post or not)
+-[ ] Design an online judge like leetcode
+-[ ] Video count in distributed system.
+-[ ] Design Ticketmaster.
+  - More focus on:
   - Ticket booking workflows
-  - Design a system to store images for FB and insta that would require 1000 uploads per sec and handle duplication
+  - What if tickets are not available?
+-[ ] design netflix 
+-[ ] design yelp 
+-[ ] design messenger status
+-[ ] Google drive
+-[ ] Ad count aggregation system (picked product architecture, but ran very similar to typical system design question). Provided both live data case and accurate data case with both CMS and persistent data storage. honestly I am not sure about this round. 
+-[ ] Top 10 songs played on spotify (top-k problem)
+
 - TAG management (https://leetcode.com/discuss/interview-experience/4351482/Design-a-tagging-system-or-HLD-or-LLD)
 - File download (https://leetcode.com/discuss/interview-experience/1263830/Facebook-product-design)
 - Apply discount on Nth order (https://leetcode.com/discuss/interview-question/system-design/459593/Facebook-or-System-Design-or-E-commerce-Apply-discount-on-every-nth-order)
@@ -83,8 +69,6 @@ https://excalidraw.com/#json=430FBILICn5gUOHNEzWDw,ZLJ9la7U2IbLqVzNm26sSw
 - Distributed counters
 - System to give prices of stack ( https://leetcode.com/discuss/interview-question/system-design/431712/Bloomberg-or-Design-a-system-to-give-prices-of-a-stock )
 - Design FigJam/Miro
-- Enterprise service bus (https://leetcode.com/discuss/interview-question/system-design/734303/Microsoftor-Design-an-Enterprise-Service-Bus)
-- 
 
 ## Tips
 - Clarification
@@ -321,6 +305,11 @@ https://excalidraw.com/#json=430FBILICn5gUOHNEzWDw,ZLJ9la7U2IbLqVzNm26sSw
       <summary>Final Design</summary>
       <img src="image/notification_5.png" width="50%" alt="Architecture">
     </details>
+  - <details>
+      <summary>Alternate Final Design</summary>
+      <img src="image/notification_architecture.png" width="50%" alt="Architecture">
+    </details>
+  
 ## 9. News Feed System
 - Requirements
 - Clarification
