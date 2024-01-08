@@ -40,26 +40,26 @@ https://excalidraw.com/#json=430FBILICn5gUOHNEzWDw,ZLJ9la7U2IbLqVzNm26sSw
 
 
 ## Problems from Leetcode
--[ ] Design web crawler
--[ ] Design online chess
--[ ] Design whatsapp
--[ ] Design price alert system similar to camelcamelcamel.com
--[ ] Design proximity server.
--[ ] Design a system to store images for FB and insta that would require 1000 uploads per sec and handle duplication. 
--[ ] Design YouTube 
--[ ] Design the Facebook post privacy functionality. In other words, if I make a Facebook post, and I have 3 privacy options to choose from (Only Me, Friends Only, Public), design how wold you get the visibility for any Faceook user (ie. can a FB user see the post or not)
--[ ] Design an online judge like leetcode
--[ ] Video count in distributed system.
--[ ] Design Ticketmaster.
+- [ ] Design web crawler
+- [ ] Design online chess
+- [ ] Design whatsapp
+- [ ] Design price alert system similar to camelcamelcamel.com
+- [ ] Design proximity server.
+- [ ] Design a system to store images for FB and insta that would require 1000 uploads per sec and handle duplication. 
+- [ ] Design YouTube 
+- [ ] Design the Facebook post privacy functionality. In other words, if I make a Facebook post, and I have 3 privacy options to choose from (Only Me, Friends Only, Public), design how wold you get the visibility for any Faceook user (ie. can a FB user see the post or not)
+- [ ] Design an online judge like leetcode
+- [ ] Video count in distributed system.
+- [ ] Design Ticketmaster.
   - More focus on:
   - Ticket booking workflows
   - What if tickets are not available?
--[ ] design netflix 
--[ ] design yelp 
--[ ] design messenger status
--[ ] Google drive
--[ ] Ad count aggregation system (picked product architecture, but ran very similar to typical system design question). Provided both live data case and accurate data case with both CMS and persistent data storage. honestly I am not sure about this round. 
--[ ] Top 10 songs played on spotify (top-k problem)
+- [ ] design netflix 
+- [ ] design yelp 
+- [ ] design messenger status
+- [ ] Google drive
+- [x] Ad count aggregation system (picked product architecture, but ran very similar to typical system design question). Provided both live data case and accurate data case with both CMS and persistent data storage. honestly I am not sure about this round. 
+- [x] Top 10 songs played on spotify (top-k problem)
 
 - TAG management (https://leetcode.com/discuss/interview-experience/4351482/Design-a-tagging-system-or-HLD-or-LLD)
 - File download (https://leetcode.com/discuss/interview-experience/1263830/Facebook-product-design)
