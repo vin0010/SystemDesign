@@ -1,9 +1,5 @@
 # Problems
 
-https://excalidraw.com/#json=430FBILICn5gUOHNEzWDw,ZLJ9la7U2IbLqVzNm26sSw
-
-> v: ﻿Standard questions around challenging projects, conflicts, strengths, time i had to convince other team to make changes etc. I felt that this round went good.
-> 
 ## Main list
 
 |    | Problem                         | Attempted          | Confident | Key Concepts                                                        |
