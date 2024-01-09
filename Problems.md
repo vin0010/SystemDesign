@@ -37,14 +37,14 @@
 
 ## Problems from Leetcode
 - [x] Design web crawler
-- [ ] Design online chess
-- [ ] Design whatsapp
-- [ ] Design price alert system similar to camelcamelcamel.com
-- [ ] Design proximity server.
+- [x] Design online chess
+- [x] Design whatsapp
+- [x] Design price alert system similar to camelcamelcamel.com
+- [x] Design proximity server.
 - [ ] Design a system to store images for FB and insta that would require 1000 uploads per sec and handle duplication. 
-- [ ] Design YouTube 
+- [x] Design YouTube 
 - [x] Design the Facebook post privacy functionality. In other words, if I make a Facebook post, and I have 3 privacy options to choose from (Only Me, Friends Only, Public), design how wold you get the visibility for any Faceook user (ie. can a FB user see the post or not)
-- [ ] Design an online judge like leetcode
+- [x] Design an online judge like leetcode
 - [x] Video count in distributed system.
 - [x] Design Ticketmaster.
   - More focus on:
@@ -438,6 +438,19 @@
   - All seat or nothing
 - Architecture
 
+
+## Proximity Service
+- Requirements
+- Clarification
+- Estimation
+- High level design
+- Deep dive
+- Architecture
+- <details>
+    <summary>Proximity</summary>
+    <img src="image/proximity.png" width="50%" alt="Proximity">
+  </details>
+
 ## Dummy
 - Requirements
 - Clarification
@@ -446,6 +459,13 @@
 - Deep dive
 - Architecture
 
+## Dummy
+- Requirements
+- Clarification
+- Estimation
+- High level design
+- Deep dive
+- Architecture
 ## 10. Chat/Messenger
 - Estimation
   - 500 million users, 40 message per day

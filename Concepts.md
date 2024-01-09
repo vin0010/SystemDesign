@@ -230,6 +230,16 @@ Concepts
         <summary>Batch vs Streaming</summary>
         <img src="image/batch_vs_streaming.png" width="50%" alt="Batch vs Streaming">
       </details>
+- SQL Database 
+  - Replication 
+  - Partitioning 
+  - Indexing 
+  - Concurrency 
+- Disk/SSD
+- NoSQL 
+  - Conflict resolution
+- Cache
+  - Requires careful benchmarking and cost analysis
 ## Organize
 - Content Delivery Network (CDN): https://lnkd.in/gjJrEJeH
 - Caching: https://lnkd.in/gC9piQbJ
