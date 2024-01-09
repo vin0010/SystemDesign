@@ -36,22 +36,23 @@
 
 
 ## Problems from Leetcode
-- [ ] Design web crawler
+- [x] Design web crawler
 - [ ] Design online chess
 - [ ] Design whatsapp
 - [ ] Design price alert system similar to camelcamelcamel.com
 - [ ] Design proximity server.
 - [ ] Design a system to store images for FB and insta that would require 1000 uploads per sec and handle duplication. 
 - [ ] Design YouTube 
-- [ ] Design the Facebook post privacy functionality. In other words, if I make a Facebook post, and I have 3 privacy options to choose from (Only Me, Friends Only, Public), design how wold you get the visibility for any Faceook user (ie. can a FB user see the post or not)
+- [x] Design the Facebook post privacy functionality. In other words, if I make a Facebook post, and I have 3 privacy options to choose from (Only Me, Friends Only, Public), design how wold you get the visibility for any Faceook user (ie. can a FB user see the post or not)
 - [ ] Design an online judge like leetcode
-- [ ] Video count in distributed system.
-- [ ] Design Ticketmaster.
+- [x] Video count in distributed system.
+- [x] Design Ticketmaster.
   - More focus on:
   - Ticket booking workflows
   - What if tickets are not available?
-- [ ] design netflix 
-- [ ] design yelp 
+- [ ] Netflix 
+- [ ] Yelp 
+- [ ] Instagram
 - [ ] design messenger status
 - [ ] Google drive
 - [x] Ad count aggregation system (picked product architecture, but ran very similar to typical system design question). Provided both live data case and accurate data case with both CMS and persistent data storage. honestly I am not sure about this round. 
@@ -406,13 +407,35 @@
     <img src="image/.png" width="50%" alt="Architecture">
   </details>
 
-## Dummy
+## Ticketmaster
 - Requirements
+  - City => Movie => Theatre => Time => seats
+  - If seats are available, reserve them until booking. 
+  - If reserved, join FIFO wait list queue to take over if booking was dropped. 
 - Clarification
 - NFR
+  - High consistency (ACID)
+  - Atomicity -> all or nothing
+    - Need to implement reserving in section level instead of seat level since seat level is complicated.
+      - May be allow number of seat booking in a section without selecting seats ( just specify number of seats )
+  - Concurrency control
 - Estimation
+  - 500 cities, 10 theatres , 2000 seats, 2 shows per day. 
+  - 2000000 tickets
+  - 24 bookins per sec
+  - Booking at peak 250/sec
+  - 50 bytes per booking data => ? 
+- API
+  - GET cities, Theatres, shows with times, seats
+  - POST booking 
+  - 
 - High level design
+  - No to Nosql since we need transactions and concurrency control
+  - Keep linkedhashmap and provide booking id during reserve/blocking seat itself and release the if seats are freed.  
 - Deep dive
+  - Race condition
+  - Seat blocking
+  - All seat or nothing
 - Architecture
 
 ## Dummy

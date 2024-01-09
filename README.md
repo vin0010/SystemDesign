@@ -120,13 +120,24 @@
   - Connection pooling
   - Pagination
   - Purging stale data will improve query performance
-  - N+1 problem or tools to identify inefficient queries. 
+  - N+1 problem or tools to identify inefficient queries.
+  - Indexing - read heavy or write heavy. 
+  - Replication factor and its replication lag. 
 - Lazy loading
 - Lightweight json serializers
 - Payload/response compression will save time
 - Asynchronous logging
-
-
+- Scaling depends a lot on traffic pattern(useful for auto scaling).
+- Define P0 flows and turn off p1 flows in disastrous failure.
+- Ladder based scaling? 
+  - If you expect 1 million QPS, scale for 5 million QPS.
+- Failover part
+  - Game day/Chaos test to induce failures and see how can we recover.
+- Log sampling
+- Resiliency
+  - Security measures
+  - To avoid crawling, use uuid for IDs
+  - 
 ### Organize
 - Build confidence by doing game day testing and deliberately fail components and check how the system holding up and if it require any fine tuning/fix.
 - SLA agreements by checking SLA latencies(P99, 95 and 50) to improve customer confidence and also know how much you can scale further

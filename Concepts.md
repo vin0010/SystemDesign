@@ -218,6 +218,18 @@ Concepts
 - Disaster recovery and backup plans
 - Performance monitoring and alerting
 
+## Deep dive tips
+- Kafka/Message queue
+  - Address events that arrive later than expected.
+  - Duplicate events
+  - Broker recovery.
+  - Timestamp issue ( API server will not give accurate results, need to discuss trade-offs with business)
+  - Suggest time series DB vs Customer aggregation by maintaining windows. 
+  - Batch system offline vs Streaming system ( near real time )
+    - <details>
+        <summary>Batch vs Streaming</summary>
+        <img src="image/batch_vs_streaming.png" width="50%" alt="Batch vs Streaming">
+      </details>
 ## Organize
 - Content Delivery Network (CDN): https://lnkd.in/gjJrEJeH
 - Caching: https://lnkd.in/gC9piQbJ

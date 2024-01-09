@@ -105,6 +105,7 @@
          - Slower reads
        - Designed to provide high availability and fault tolerance
        - Not specifically designed for time series data but can handle it efficiently.
+       - Natively supports horizontal scaling
      - RIAK
        - Distributed NoSQL database optimized for time series data.
        - Key Value store 
