@@ -12,9 +12,12 @@
  - Concurrency
  - Locks and Contention
  - Concurrency
+ - Consistency
  - Indexing
  - UUID usecase
    - Predictive ids
+ - SQL
+ - NoSQL
 7. Cap theorem
 8. Concurrency
 9. Message Queues and Stream Processing
@@ -24,4 +27,7 @@
 11. Monitoring and Logging
 12. Fault Tolerance and High Availability
 13. CI/CD
+14. Micro services
+  - Idenmpotency
+  - Data consistency
    
