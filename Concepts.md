@@ -1,6 +1,16 @@
 Sure, here is a compact list of all three sections to prepare for system design interviews:
 
-Concepts
+# Concepts
+1. NFR
+2. Data Storage and Management
+3. Messaging
+4. Caching
+5. Networking and Protocols
+6. Big Data and Stream Processing
+7. Service Discovery
+8. Orchestration
+  9. CI/CD
+10. 
 
 ## Non Functional Requirements
 - CAP-based tradeoffs   
