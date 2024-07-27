@@ -30,4 +30,9 @@
 14. Micro services
   - Idenmpotency
   - Data consistency
+15. Replication
+16. Transactions
+17. Problems with DIstributed Systems
+18. Consistency and Guarentees
+19.  
    
