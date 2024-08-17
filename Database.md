@@ -1,4 +1,4 @@
-## Database
+![image](https://github.com/user-attachments/assets/ba324bf5-9d54-451c-9b79-75ec2cf09db3)## Database
 - SQL
   - Postgres
   - MySQL
@@ -37,6 +37,10 @@
   - 
 
 > Consistency make database harder to scale.
+>
+
+![image](https://github.com/user-attachments/assets/e01829c9-afef-4ac3-bbdc-88fda8f0156d)
+
 
 | Database             | Usecase                                                               |
 |----------------------|-----------------------------------------------------------------------|
