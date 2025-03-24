@@ -1,3 +1,11 @@
+# Behavioural Interview
+- Don't memorize ( does it work? Because infinite situations? )
+- 
+- 
+
+
+
+
 <<<<<<< HEAD
 A good engineer always thinks like a product manager ⚡
 

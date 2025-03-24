@@ -5,24 +5,23 @@
 |    | Problem                         | Attempted          | Confident | Key Concepts                                                        |
 |----|---------------------------------|--------------------|-----------|---------------------------------------------------------------------|
 | 1  | Distributed Metrics/Logging     | :x:                | :x:       | - Distributed Systems<br>- Logging<br>- Metrics<br>- Event Sourcing |
+| 8  | Notification System             | :white_check_mark: | :x:       | - Notifications<br>- Pub/Sub<br>- Distributed Systems               |
+| 10 | Chat                            | :white_check_mark: | :x:       | - Real-time Messaging<br>- Websockets<br>- Pub/Sub                  |
+| 12 | Youtube                         | :x:                | :x:       | - Video Streaming<br>- Content Delivery<br>- Recommendation Systems |
 | 2  | Rate Limiter                    | :white_check_mark: | :x:       | - Rate Limiting<br>- Distributed Systems                            |
-| 3  | Consistent Hashing              | :x:                | :x:       | - Hashing<br>- Consistent Hashing<br>- Distributed Systems          |
-| 4  | KV store                        | :x:                | :x:       | - Key-Value Store<br>- NoSQL Databases                              |
-| 5  | UID generator                   | :x:                | :x:       | - Unique Identifier<br>- Distributed Systems                        |
 | 6  | URL shortener                   | :white_check_mark: | :x:       | - URL Shortening<br>- Hashing<br>- Redirects                        |
 | 7  | Web crawler                     | :white_check_mark: | :x:       | - Web Crawling<br>- Distributed Systems                             |
-| 8  | Notification System             | :white_check_mark: | :x:       | - Notifications<br>- Pub/Sub<br>- Distributed Systems               |
 | 9  | News feed system                | :white_check_mark: | :x:       | - News Feed<br>- Social Networks<br>- Algorithms                    |
-| 10 | Chat                            | :white_check_mark: | :x:       | - Real-time Messaging<br>- Websockets<br>- Pub/Sub                  |
 | 11 | Search autocomplete             | :x:                | :x:       | - Search Algorithms<br>- Autocomplete<br>- Data Structures          |
-| 12 | Youtube                         | :x:                | :x:       | - Video Streaming<br>- Content Delivery<br>- Recommendation Systems |
 | 13 | Drive                           | :white_check_mark: | :x:       | - File Storage<br>- Cloud Storage<br>- Distributed Systems          |
+| 5  | UID generator                   | :x:                | :x:       | - Unique Identifier<br>- Distributed Systems                        |
+| 28 | Job Scheduler                   | :white_check_mark: | :x:       |                                                                     |
 | 14 | Swiggy/Doordash                 | :white_check_mark: | :x:       | - Food Delivery<br>- Geolocation<br>- Order Management              |
 | 15 | Kids safety                     | :white_check_mark: | :x:       | - Child Safety<br>- Parental Controls<br>- Monitoring               |
 | 16 | Proximity service               | :x:                | :x:       | - Proximity Detection<br>- Location-based Services                  |
 | 17 | Nearby friends                  | :x:                | :x:       | - Location Sharing<br>- Social Networks                             |
 | 18 | Google map                      | :x:                | :x:       | - Maps<br>- Geolocation<br>- Routing<br>- API                       |
-| 19 | Distributed Message Queue       | :white_check_mark: | :x:       | - Message Queues<br>- Pub/Sub<br>- Distributed Systems              |
+| 4  | KV store                        | :x:                | :x:       | - Key-Value Store<br>- NoSQL Databases                              |
 | 20 | Metrics Monitoring and alerting | :x:                | :x:       | - Monitoring<br>- Alerting<br>- Distributed Systems                 |
 | 21 | Ad click event aggregation      | :white_check_mark: | :x:       | - Ad Tech<br>- Event Aggregation<br>- Analytics                     |
 | 22 | Hotel reservation               | :white_check_mark: | :x:       | - Reservation Systems<br>- Booking Platforms                        |
@@ -31,7 +30,7 @@
 | 25 | Payment                         | :white_check_mark: | :x:       | - Payment Gateways<br>- Transactions<br>- Financial Systems         |
 | 26 | Digital wallet                  | :x:                | :x:       | - Digital Payments<br>- Wallets<br>- Cryptocurrency                 |
 | 27 | Stock exchange                  | :x:                | :x:       | - Stock Trading<br>- Financial Markets<br>- Exchange Platforms      |
-| 28 | Job Scheduler                   | :white_check_mark: | :x:       |                                                                     |
+| 19 | Distributed Message Queue       | :white_check_mark: | :x:       | - Message Queues<br>- Pub/Sub<br>- Distributed Systems              |
 
 
 

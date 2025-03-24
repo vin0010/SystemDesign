@@ -13,11 +13,9 @@
 
 
 ## 4 steps
-1. Understand the problem and establish design scope
-   1. This is very important
-   2. Ask clarifying questions
-   3. If the interviewer ask you to make assumptions, write down assumptions
-   4. Check if you need back of the end envelope
+1. Understand the problem and establish design scope ( wear product manager hat)
+   - Ask clarifying questions, don't make assumptions, If the interviewer ask you to make assumptions, write down assumptions
+   - Check if you need back of the end envelope
       - 1 Million req per day = 12 rps
       - 1 Billion rp month = 400 rps
       - 1 Billion rp day = 400*30 rps
@@ -31,22 +29,40 @@
         - 1MB - 1024 KB
         - 1GB - 1024 MB
         - 1 Billion KB = 1TB
-2. Propose high-level design and get buy-in
-   1. Come up with an initial blueprint for the design. Ask for feedback. Treat your interviewer as a teammate and work together. Many good interviewers love to talk and get involved.
-   2. Draw box diagrams with key components on the whiteboard or paper. This might include clients (mobile/web), APIs, web servers, data stores, cache, CDN, message queue, etc.
-   3. If possible, go through a few concrete use cases. This will help you frame the high-level design. It is also likely that the use cases would help you discover edge cases you have not yet considered.
-   4. API and schema ->  depends on the problem, for design google search engine not necessary, for multiplayer poker game, it makes sense.
-   5. LB/any node can be a single point of failure, point it out and suggest solution ( for LB active -passive LB, for services discovery mechanism etc.) 
-3. Design deep dive
-   1. Had some initial ideas about areas to focus on in deep dive based on her feedback You shall work with the interviewer to identify and prioritize components in the architecture.
-   2. Add more details to the system(look into news feed system diagram below)
-   3. Talk about bottlenecks
-   4. **Talk about Game days to simulate failure in each component and see how can we improve. **
-4. Wrap up
-   1. Recap the system if necessary
-   2. Error cases (server failure, network loss, etc.) are interesting to talk about.
-   3. Metrics and error logging
-   4. How to handle the next scale curve is also an interesting topic. For example, if your current design supports 1 million users, what changes do you need to make to support 10
+   - Once you clearly draft FR and NFR
+- Propose high-level design and get buy-in
+   - Come up with an initial blueprint for the design. Ask for feedback. Treat your interviewer as a teammate and work together. Many good interviewers love to talk and get involved.
+      - Let the request guide your design
+      - Write API for each component?
+      - Schema? 
+   - Draw box diagrams with key components on the whiteboard or paper. This might include clients (mobile/web), APIs, web servers, data stores.
+   - If possible, go through a few concrete use cases. This will help you frame the high-level design. It is also likely that the use cases would help you discover edge cases you have not yet considered.
+   - API and schema ->  depends on the problem, for design google search engine not necessary, for multiplayer poker game, it makes sense.
+   - LB/any node can be a single point of failure, point it out and suggest solution ( for LB active -passive LB, for services discovery mechanism etc.)
+   - Write down what you will be focusing on later as well if possible. 
+- Design deep dive
+   - Had some initial ideas about areas to focus on in deep dive based on her feedback You shall work with the interviewer to identify and prioritize components in the architecture.
+      a. Mention/write NFR for component level here as well.  
+   - Add more details to the system(look into news feed system diagram below)
+   - Talk about bottlenecks 
+   - Look at access patterns and it will give you what to optimize.
+   - Common trade-offs : Pull vs Push, in memory vs DB, single vs distributed.
+      - Everything decision or tech has a cost/trade off
+   - **Talk about Game days to simulate failure in each component and see how can we improve. **
+   - Talk about unhappy path. (i.e in uber what if two drivers accept ride, vise versa)
+   - Identifying weakness is important. 
+   - Do not overcomplicate solution - in uber, when no drivers around, just inform rider about this and ask him to try after sometime.
+   - This is basically about how components fit together and solve the use case.
+   - Long term thinking is good. 
+   - Focus less on mechanics and more on trade offs.
+   - Think into the future what doesn't scale well.
+4. Wrap up/Evaluation of design
+   - Recap the system if necessary
+     - Dry run with edge cases/happy/unhappy paths and evaluate if things will work. Consider access patterns as well.  
+     - Also assume faults or exceptions in system, wrong order of events in queue, cache down etc. 
+   - Error cases (server failure, network loss, etc.) are interesting to talk about.
+   - Metrics and error logging
+   - How to handle the next scale curve is also an interesting topic. For example, if your current design supports 1 million users, what changes do you need to make to support 10
 
 ### Talk about
 - Database scaling
@@ -62,16 +78,19 @@
 ### Dos
 - Always ask for clarification. Do not assume your assumption is correct. 
 - Understand the requirements of the problem. 
+- Use standard terminology to save time.
 - There is neither the right answer nor the best answer. A solution designed to solve the problems of a young startup is different from that of an established company with millions of users. Make sure you understand the requirements. 
-- Let the interviewer know what you are thinking. Communicate with your interviewer. 
+- Let the interviewer know what you are thinking. Communicate with your interviewer.
+  - Ask if he has any concerns or questions to understand if he disagrees with you. 
 - Suggest multiple approaches if possible. 
 - Once you agree with your interviewer on the blueprint, go into details on each component. Design the most critical components first. 
 - Convey ideas to the interviewer
 
 ### Don'ts 
+- "It depends" usually not a great answer when given specific scenario. -> ask clarifying questions and assert an opinion on right choice.   
 - Don’t go into too much detail on a single component in the beginning. Give the high-level design first then drills down.
 - Communicate. Don't think in silence.
-- Don't 
+- If you don't know something don't paper over it.
 
 ### Time
 - Step 1 Understand the problem and establish design scope: 3 - 10 minutes 
