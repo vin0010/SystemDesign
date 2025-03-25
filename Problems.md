@@ -1,6 +1,6 @@
 # Problems
 
-## Main list
+## Common problems
 
 |    | Problem                         | Attempted          | Confident | Key Concepts                                                        |
 |----|---------------------------------|--------------------|-----------|---------------------------------------------------------------------|
@@ -13,7 +13,7 @@
 | 7  | Web crawler                     | :white_check_mark: | :x:       | - Web Crawling<br>- Distributed Systems                             |
 | 9  | News feed system                | :white_check_mark: | :x:       | - News Feed<br>- Social Networks<br>- Algorithms                    |
 | 11 | Search autocomplete             | :x:                | :x:       | - Search Algorithms<br>- Autocomplete<br>- Data Structures          |
-| 13 | Drive                           | :white_check_mark: | :x:       | - File Storage<br>- Cloud Storage<br>- Distributed Systems          |
+| 13 | Uber                            | :white_check_mark: | :x:       | - File Storage<br>- Cloud Storage<br>- Distributed Systems          |
 | 5  | UID generator                   | :x:                | :x:       | - Unique Identifier<br>- Distributed Systems                        |
 | 28 | Job Scheduler                   | :white_check_mark: | :x:       |                                                                     |
 | 14 | Swiggy/Doordash                 | :white_check_mark: | :x:       | - Food Delivery<br>- Geolocation<br>- Order Management              |
