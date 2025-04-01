@@ -25,6 +25,7 @@
 - Data modeling for high-performance and scalability
 - GeoData
     - Geohash for searching geodata
+    - ![img.png](img.png)
     - Postgres GIS extension for geospatial indexing and analysis
 - Search
 
