@@ -99,6 +99,12 @@
         - Vector Clocks — Track version history; if versions conflict, the client resolves it (e.g., DynamoDB).
         - CRDTs (Conflict-Free Replicated Data Types) — Special data structures that merge changes automatically without
           conflicts (e.g., Riak).
+    - Isolation levels
+      - Without isolation, transactions might interfere with each other, leading to problems like:
+      - Dirty reads — Reading uncommitted data from another transaction. 
+      - Non-repeatable reads — Getting different results when reading the same row multiple times within a transaction. 
+      - Phantom reads — New rows "appearing" when you re-run a query in the same transaction.
+      ![isolation.png](isolation.png)
 - NoSQL
     - Instead of storing data in rows, we can store data in documents with IDs and I can store nested documents. We can
       store ton of data in this collection.

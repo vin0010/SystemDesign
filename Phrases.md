@@ -1,6 +1,5 @@
 # Phrases
 
-- Do cons outweight pros
 - Some queries might require computationally intense server side resources.
 - We will build geographically distributed network of CDNs to decrease load latency
 - Users are geoDNS-routed, also known as geo-routed, to the closest data center
@@ -12,4 +11,8 @@
 - Consider using cache when data is read frequently but modified infrequently.
 - Inconsistency can happen because data-modifying operations on the data store and cache are not in a single transaction.
 - When scaling across multiple regions, maintaining consistency between the data store and cache is challenging.
-- This service can become stateless by storing user and session details in a data store. 
+- This service can become stateless by storing user and session details in a data store.
+- Consistency make database harder to scale.
+- We need to implement proper isolation levels and either row-level locking or Optimistic Concurrency Control (OCC) to fully prevent double bookings.
+- Keeping the Elasticsearch index synchronized with PostgreSQL can be complex and requires a reliable mechanism to ensure data consistency.
+- Maintaining an Elasticsearch cluster adds additional infrastructure complexity and cost.

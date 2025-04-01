@@ -240,6 +240,15 @@ Concepts
   - Conflict resolution
 - Cache
   - Requires careful benchmarking and cost analysis
+
+
+
+- Elastic
+  - Conveniently, Elasticsearch has built-in caching capabilities that can be leveraged to store results of frequent queries. This reduces the query processing load on the search engine itself. The node query cache in Elasticsearch is an LRU cache shared by all shards on a node, caching results of queries used in the filter. Additionally, Elasticsearch's shard-level request cache is used for caching search responses consisting of aggregation. This can be used for adaptive caching strategies, where the system learns and caches results of the most frequently executed queries over time.
+
+
+
+
 ## Organize
 - Content Delivery Network (CDN): https://lnkd.in/gjJrEJeH
 - Caching: https://lnkd.in/gC9piQbJ
