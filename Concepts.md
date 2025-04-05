@@ -161,6 +161,7 @@ Concepts
       - Cost
       - Expiration time
       - CDN fallback to fetch data from origin
+    - CDNs are relatively expensive. To address this, it is common to be strategic about what files are cached and for how long. We can use a cache control header to specify how long the file should be cached in the CDN. We can also use a cache invalidation mechanism to remove files from the CDN when they are updated or deleted. This way, only files that are frequently accessed are cached and we don't waste money caching files that are rarely accessed
 
 ## Big Data and Stream Processing
 - Big data processing frameworks: Hadoop, Spark, Kafka

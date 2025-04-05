@@ -35,6 +35,29 @@
 
 
 ## Problems from Leetcode
+
+### 2025
+- Design Leetcode
+- Design Real time commenting system for live videos/events in Facebook/Instagram.
+- Design Instagram Auction system
+- Design Ticket Booking system
+
+
+- Infra
+  - Ad Click Aggregator (More common for Infra)
+  - Memcache (1% of the time, E4 will be asked this like an unfortunate candidate did a few days ago...)
+  - Top K Heavy Hitters (More common for Infra)
+  - Botnets (And 5% of the time, it's an actual webcrawler. More common for Infra)
+  - Online Chess (Not frequently asked but yikes, it's a hard one)
+  - Design FB Privacy Settings (More common for Infra)
+  - Design FB Live
+  - Design DropBox
+  - Design Eventbrite, a ticket-selling platform.
+  - Design Newsfeed
+  - Chat/whatsapp
+  - 
+
+
 - [x] Design web crawler
 - [x] Design online chess
 - [x] Design whatsapp
@@ -84,7 +107,107 @@
       - Search -> Scalability and availability
 - Design
   - Initially draw boxes, don't focus on design.
-  - 
+
+
+## Twitter
+- Use cases
+  - Tweet
+  - Timeline (Home(following user tweets), User(your tweets and retweets) and Search)
+  - Trends
+
+- Read > write 
+- Eventual consistency
+- Scalability
+- Storage
+
+- Timeline
+  - User timeline ( his own tweets and replies )
+    - maintain in redis. 
+  - Home timeline.
+    - main in redis as well but pulled as well. See below.
+  - Celebrity 
+    - pull based -> When a user follow a celebrity, and celebrity makes a tweet nothing happens. Because fanning out for 100M user is hard.
+    - Whenever user load their timeline, whatever in his home timeline ( from fanout ) and get his followers one by one and pull their tweet concurrently and lazy load(add t to response or push it to his home timeline).  
+  - Non celebrity
+    - fan out to push tweets from user timeline to home timeline of his followers. 
+    - But its not possible for celebrity as its hard to do. 
+- Trends
+  - 1000 tweet in 5 min > 10000 tweet in 1 month. ( should be like a rolling window so that when its out of trend, its handled as well)
+  - Region based trends also needs to be handled. 
+  - Logic ( all these services are connected by a queue)
+    - Filtering service to filter common boring tags like food, fun, funny etc and remove violating content.
+    - Parse -> parse all valid hashtags for use and remove useless tags, if no tags possibly build tags with some NLP. 
+      - Geo processing service -> find location of tweet and group by location, example #rugby maps to usa when rugby match happen in USA
+        - count location -> this will find what location trends what hash tag. 
+      - Trending processing service -> maintain window and count hastags
+        - Rank service -> to rank each hashtags. 
+      - Outcome of above data is writted to a data store from which its queried. 
+- Search
+  - Inverted index from tweets.
+  - Filter same as above before indexing. 
+
+## Ticket master
+- Use cases
+  - View event
+  - Search event
+  - Book tickets
+- NFR
+  - Scalability
+  - Consistency for booking
+  - Low latency
+  - High availability -> Search and viewing events
+- HLD
+  - Search service to search event
+  - Event crud
+    - this will provides tickets and not search
+  - Booking ( reserve and confirm )
+    - Redis lock for reserve. -> if lock goes down, still it wont affect the system as DB is consistent but who reserve their ticket might lose theirs.  
+  - DB postgres
+- Deep dives
+  - Scale search
+    - Introduce search optimized DB
+    - Elastic search -> use CDC to update events or even Event crud can write it here. 
+    - enable node query cache(a cache in all instance/shards) for faster reads since data wont change often.
+    - Or cache hot search terms to CDN
+  - Scale event crud.
+  - Avoid double booking.
+  - Read time seats -> SSE to push seat updates. -> open connection, server can push events.
+![img_1.png](img_1.png)
+  - User experience
+
+## Uber / Lyft
+- FR
+  - User request drive
+  - System find matching drivers
+  - Drivers accept ride
+  - Drivers update their locations
+- NFR
+  - Consistency -> Booking
+  - Availability -> ride request
+  - Scalability
+  - User Experience
+- APIs
+  - Entities here
+    - Customer
+    - Driver
+    - System
+  - POST /v1/ride
+    - Body
+      - source and dest
+      - time
+      - customer id
+- 
+
+
+
+
+
+
+
+
+
+
+
 ## 1. Distributed Metrics/Logging
 - Use message broker
   - In memory message broker Vs Log based message broker
@@ -358,36 +481,53 @@
 - Architecture
 ## 13. Drive/Google Drive/Box
 - Requirements
-  - Files supported
-    - Files need to be encrypted?
+  - Upload file
+  - Download file
     - Size limit
+    - Files need to be encrypted? -> stretch
+  - Share file
   - Users
-  - Average users storage
+    - Storage size
   - File versioning
-  - Share
   - File preview
   - Search?
   - NFR
-    - Durability ( replication and geo distribution )
-    - Availability
+    - Durability of uploaded files ( replication and geo distribution )
+    - Availability > consistency ( eventual )
     - Scalability
-    - Data integrity
-- Clarification
+    - Data integrity ( use checksums to verify uploaded files)
 
 - Estimation
+  - Read > Write
+  - numbers here. 
 - High level design
-  - 1:1 read/write ratio
-  - Block servers
-    - To upload data by blocks in BD.
-    - Use checksum or hash to verify data integrity
-    - Split compress, encrypt order and store data
+  - File service
+  - Store file content and file metadata separately. 
+  - Upload directly to blob store using pre-signed URL
+  - FIle status in metadata should handled once upload completes.
 - Deep dive
   - Upload
-    - Simple upload for smaller files
+    - To upload data by chunks in BD.
+      - Define chunk size by bandwidth, IO capacity, server capacity etc.
+    - Use checksum or hash to verify data integrity.
+      - This checksum can be checked incrementally so no need to keep all chunk checksum in memory, verify only final checksum/hash. 
+    - Split compress, encrypt order and store data.
     - Resumable upload for really large files.
-    - Maintain size
-    - Sync conflicts on shared drives.
-    - Write metadata and then upload file.
+      - Continue from last chunk.
+  - Download
+    - Download in chunks so retry is possible
+    - Frequently downloaded files, 80/20 rule is applicable, CDN can be a solution here. 
+      - Invalidation mechanism and TTL in header to keep it efficient as CDN is costly. 
+  - Share
+    - Share info can be part of separate table or same file metadata table depends on maximum people you can share with. 
+  - Sync
+    - local to cloud
+      - SDK to monitor local changes and upload chunks
+    - cloud to local
+      - SDK to consume cloud changes and download chunks
+    - Only sync delta chunks. 
+    - Conflicts 
+      - LWW
 - Architecture
 - <details>
     <summary>Region replication</summary>
