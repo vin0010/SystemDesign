@@ -191,12 +191,32 @@
     - Customer
     - Driver
     - System
-  - POST /v1/ride
+    - missed -> Ride and Location
+  - POST /v1/ride  -> this should be patch on ride. 
     - Body
       - source and dest
       - time
       - customer id
-- 
+  - missed -> fare-estimate, patch on ride from driver side and patch/driver/driver/update -> to stamp pickup, drop, arrived during ride.
+  - Location DB can be postgres and postgis which supports quad tree but geohash is better as its simple and easy to search and prefix based allows retrieval of nearby, uniform distribution of hash values.
+  - Push notification from ride matching. 
+- Deep dives
+  - Location update of driver
+  - Location search
+  - Avoid double booking.
+    - Simpler approach is to make sure
+      - Don't send more than 1 ride request per driver.
+      - Don't send more than 1 request to any driver.
+      - Simpler solution is to add column in table for driver status ( assigned, request sent) but it wont expire after 5 sec window(for driver to accept/decline).
+      - So better option is to set driver id with TTL 5s, rider matching service can use it to send request to drivers.
+      - We can keep location data and driver data in one redis as well.
+  - Scale -> add ride request queue before ride matching service
+- ![img_3.png](img_3.png)
+
+
+
+
+- I know at this point, we have to BOE, its my pref I forego them for now and come back if it influence my design. 
 
 
 
