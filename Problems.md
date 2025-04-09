@@ -42,12 +42,12 @@
 | Design Leetcode              |   ✅    |      ❌       |         ❌         |
 | Design Ticket Booking system |   ✅    |      ❌       |         ❌         |
 | Twitter                      |   ✅    |      ❌       |         ✅         |
-| FB News Feed                 |   ❌    |      ❌       |         ❌         |
+| FB News Feed                 |   ✅    |      ❌       |         ❌         |
 | Tinder                       |   ❌    |      ❌       |         ❌         |
 | WhatsApp                     |   ❌    |      ❌       |         ❌         |
 | Yelp                         |   ❌    |      ❌       |         ❌         |
 | Strava                       |   ❌    |      ❌       |         ❌         |
-| FB Live Comments             |   ❌    |      ❌       |         ❌         |
+| FB Live Comments             |   ✅    |      ✅       |         ❌         |
 | FB Post Search               |   ❌    |      ❌       |         ❌         |
 | Instagram                    |   ❌    |      ❌       |         ❌         |
 | YouTube Top K                |   ❌    |      ❌       |         ❌         |
@@ -56,7 +56,7 @@
 | Google Docs                  |   ❌    |      ❌       |         ❌         |
 | Distributed Cache            |   ❌    |      ❌       |         ❌         |
 | Web Crawler                  |   ❌    |      ❌       |         ❌         |
-| Ad Click Aggregator          |   ❌    |      ❌       |         ❌         |
+| Ad Click Aggregator          |   ✅    |      ❌       |         ❌         |
 | Auction System               |   ❌    |      ❌       |         ❌         |
 | Rate limiter                 |   ❌    |      ❌       |         ❌         |
 
@@ -271,9 +271,90 @@
   - Availability > consistency
     - Read after write consistency for post creator
   - Low latency
+
+
+### FB live comments
+- Use case
+  - Post comments
+  - See stream of comments ( notifications )
+  - Old comments? ( top/bottom scroll )
+- Questions
+  - What is a comment? -> text, links, limits, media? 
+  - Reaction to comments? 
+  - AuthZ and AuthN taken care.
+  - chronologically ordered by time.
+  - Assumption -> video streaming is already taken care. 
+- BOE
+  - Number of users
+  - Max can watch video
+- NFR
+  - Availability > consistency
+  - Infinite scroll? 
+  - Scalability
+- API
+  - POST v1/comment
+    - { video_id, comment }
+  - GET v1/comments
+    - { video_id, offset/cursor details }
+- Deep dives
+  - How to scale 
+  - SSE, connection needs to be established, how to make sure, comments reach user regardless of which server he connects to?
+    - websocket is not a good option here because 
+      - Initiate HTTP handshake then upgrade to WS. So,  
+      - It uses its own protocol. 
+      - Websocket has to be passed through API gateway, so support needed multiple layers.
+        - Some support but it has a cost, not a cheap option and complex. 
+      - Not any reads as writes to make it bidirectional.
+      - Not everyone is a commenter.
+      - Also in case of a server crash, thundering herd problem to re-establish all connections.
+    - SSE
+      - uni dir
+      - Browser has built in support to re establish connection
+      - Its just like a long running HTTP req
+      - Doesn't require anything fancy.
+      - SOme API gateway also doesnt support SSE well, little tweaks reqreuired to make sure API doesnt close this by default
+  - Redis pub/sub between comment service and messaging service which maintains SSE connections
+    - But limitation here is redis is fire and forget, so old messages cannot be retrieved/replayed. 
+    - In such scenario, need to rely on DB call.
+    - Pagination -> cursor better than offset as no need to count previous rows.
+    - kafka vs redis needs to be explained. Kafka is not suitable here because lot of overhead for subscribe and unsubscribe.
+    - redis pub sub makes it easier and faster, no durability though. 
+
+- 
+- I know at this point, we have to BOE, its my pref I forego them for now and come back if it influence my design.
+
+## Ad click aggregator
+- Clarifications
+  - ads are displayed in websites
+  - SDK for clients
+  - ads are created and managed.
+  - Real time / near real time? -> 1 mins
+- Use case
+  - Aggregate ads
+  - Analytics on aggregated data
+    - Query dimenstions: time, ad, region and domain
+  - Out of scope 
+    - Ad target?
+    - Managing ads
+- BOE
+  - Number of ads -> 1M (10^6)
+  - Clicks per day -> 1B ( 10^9)
+  - read ~ write ( optimize read and write separately )
+  - TPS -> (10^9)/(10^5) -> 10^4 
+    - Burst 10^5
+- API
+  - POST /v1/click
+   - ad_id, timestamp, user, location
+  - GET /v1/analytics?...
+- NFR
+  - Liteness & Low latency ( Application shouldn't feel the load to write ads )
+  - Scalability
+  - Accuracy -> no double events or duplicate consumption ( in client and server)
 - 
 
-- I know at this point, we have to BOE, its my pref I forego them for now and come back if it influence my design.
+
+
+
 
 ## Old -> clean below
 
