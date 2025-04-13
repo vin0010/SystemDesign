@@ -24,4 +24,5 @@
 - I like to start with a broad overview of the primary entities. At this stage, it is not necessary to know every specific column or detail. We will focus on these intricacies later when we have a clearer grasp of the system (during the high-level design).
 - I am going to outline some simple APIs, but may come back and improve them as we delve deeper into the design.
 - Modern servers and operating systems can handle large numbers of concurrent connections—commonly in the range of 100k. Realistically, system resources like CPU, memory, and file descriptors become the bottleneck before you hit any theoretical limit.
+- Separating read heavy and write heavy workload reduces contention and resource competition which will overall competition.
 - 

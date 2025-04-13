@@ -34,31 +34,31 @@
 
 ## 2025
 
-| System Design Problem        | ✅ Read | 🧪 Self Mock | 🎤 Mock Interview |
-|------------------------------|:------:|:------------:|:-----------------:|
-| Bit.ly                       |   ✅    |      ❌       |         ❌         |
-| Dropbox                      |   ✅    |      ❌       |         ❌         |
-| Gopuff (Local delivery)      |   ✅    |      ❌       |         ❌         |
-| Design Leetcode              |   ✅    |      ❌       |         ❌         |
-| Design Ticket Booking system |   ✅    |      ❌       |         ❌         |
-| Twitter                      |   ✅    |      ❌       |         ✅         |
-| FB News Feed                 |   ✅    |      ❌       |         ❌         |
-| Tinder                       |   ❌    |      ❌       |         ❌         |
-| WhatsApp                     |   ❌    |      ❌       |         ❌         |
-| Yelp                         |   ❌    |      ❌       |         ❌         |
-| Strava                       |   ❌    |      ❌       |         ❌         |
-| FB Live Comments             |   ✅    |      ✅       |         ❌         |
-| FB Post Search               |   ❌    |      ❌       |         ❌         |
-| Instagram                    |   ❌    |      ❌       |         ❌         |
-| YouTube Top K                |   ❌    |      ❌       |         ❌         |
-| Uber                         |   ✅    |              |                   |
-| Robinhood                    |   ❌    |      ❌       |         ❌         |
-| Google Docs                  |   ❌    |      ❌       |         ❌         |
-| Distributed Cache            |   ❌    |      ❌       |         ❌         |
-| Web Crawler                  |   ❌    |      ❌       |         ❌         |
-| Ad Click Aggregator          |   ✅    |      ❌       |         ❌         |
-| Auction System               |   ❌    |      ❌       |         ❌         |
-| Rate limiter                 |   ❌    |      ❌       |         ❌         |
+| System Design Problem   | ✅ Read | 🧪 Self Mock | 🎤 Mock Interview |
+|-------------------------|:------:|:------------:|:-----------------:|
+| Bit.ly                  |   ✅    |      ❌       |         ❌         |
+| Dropbox                 |   ✅    |      ❌       |         ❌         |
+| Gopuff (Local delivery) |   ✅    |      ❌       |         ❌         |
+| Leetcode                |   ✅    |      ✅       |         ❌         |
+| Ticket Booking system   |   ✅    |      ❌       |         ❌         |
+| Twitter                 |   ✅    |      ❌       |         ✅         |
+| FB News Feed            |   ✅    |      ❌       |         ❌         |
+| Tinder                  |   ❌    |      ❌       |         ❌         |
+| WhatsApp                |   ✅    |      ❌       |         ❌         |
+| Yelp                    |   ❌    |      ❌       |         ❌         |
+| Strava                  |   ❌    |      ❌       |         ❌         |
+| FB Live Comments        |   ✅    |      ✅       |         ❌         |
+| FB Post Search          |   ❌    |      ❌       |         ❌         |
+| Instagram               |   ❌    |      ❌       |         ❌         |
+| YouTube Top K           |   ❌    |      ❌       |         ❌         |
+| Uber                    |   ✅    |              |                   |
+| Robinhood               |   ❌    |      ❌       |         ❌         |
+| Google Docs             |   ❌    |      ❌       |         ❌         |
+| Distributed Cache       |   ❌    |      ❌       |         ❌         |
+| Web Crawler             |   ❌    |      ❌       |         ❌         |
+| Ad Click Aggregator     |   ✅    |      ❌       |         ❌         |
+| Auction System          |   ❌    |      ❌       |         ❌         |
+| Rate limiter            |   ❌    |      ❌       |         ❌         |
 
 ## Problems from interview experience
 
@@ -251,6 +251,7 @@
 - ![img_3.png](img_3.png)
 
 ## Facebook News feed
+
 - Use case
     - create posts
     - view posts
@@ -267,92 +268,165 @@
         - text -> limit? -> 100000 words
         - links? ( preview for links)
 - NFR
-  - Scalability
-  - Availability > consistency
-    - Read after write consistency for post creator
-  - Low latency
-
+    - Scalability
+    - Availability > consistency
+        - Read after write consistency for post creator
+    - Low latency
 
 ### FB live comments
-- Use case
-  - Post comments
-  - See stream of comments ( notifications )
-  - Old comments? ( top/bottom scroll )
-- Questions
-  - What is a comment? -> text, links, limits, media? 
-  - Reaction to comments? 
-  - AuthZ and AuthN taken care.
-  - chronologically ordered by time.
-  - Assumption -> video streaming is already taken care. 
-- BOE
-  - Number of users
-  - Max can watch video
-- NFR
-  - Availability > consistency
-  - Infinite scroll? 
-  - Scalability
-- API
-  - POST v1/comment
-    - { video_id, comment }
-  - GET v1/comments
-    - { video_id, offset/cursor details }
-- Deep dives
-  - How to scale 
-  - SSE, connection needs to be established, how to make sure, comments reach user regardless of which server he connects to?
-    - websocket is not a good option here because 
-      - Initiate HTTP handshake then upgrade to WS. So,  
-      - It uses its own protocol. 
-      - Websocket has to be passed through API gateway, so support needed multiple layers.
-        - Some support but it has a cost, not a cheap option and complex. 
-      - Not any reads as writes to make it bidirectional.
-      - Not everyone is a commenter.
-      - Also in case of a server crash, thundering herd problem to re-establish all connections.
-    - SSE
-      - uni dir
-      - Browser has built in support to re establish connection
-      - Its just like a long running HTTP req
-      - Doesn't require anything fancy.
-      - SOme API gateway also doesnt support SSE well, little tweaks reqreuired to make sure API doesnt close this by default
-  - Redis pub/sub between comment service and messaging service which maintains SSE connections
-    - But limitation here is redis is fire and forget, so old messages cannot be retrieved/replayed. 
-    - In such scenario, need to rely on DB call.
-    - Pagination -> cursor better than offset as no need to count previous rows.
-    - kafka vs redis needs to be explained. Kafka is not suitable here because lot of overhead for subscribe and unsubscribe.
-    - redis pub sub makes it easier and faster, no durability though. 
 
-- 
+- Use case
+    - Post comments
+    - See stream of comments ( notifications )
+    - Old comments? ( top/bottom scroll )
+- Questions
+    - What is a comment? -> text, links, limits, media?
+    - Reaction to comments?
+    - AuthZ and AuthN taken care.
+    - chronologically ordered by time.
+    - Assumption -> video streaming is already taken care.
+- BOE
+    - Number of users
+    - Max can watch video
+- NFR
+    - Availability > consistency
+    - Infinite scroll?
+    - Scalability
+- API
+    - POST v1/comment
+        - { video_id, comment }
+    - GET v1/comments
+        - { video_id, offset/cursor details }
+- Deep dives
+    - How to scale
+    - SSE, connection needs to be established, how to make sure, comments reach user regardless of which server he
+      connects to?
+        - websocket is not a good option here because
+            - Initiate HTTP handshake then upgrade to WS. So,
+            - It uses its own protocol.
+            - Websocket has to be passed through API gateway, so support needed multiple layers.
+                - Some support but it has a cost, not a cheap option and complex.
+            - Not any reads as writes to make it bidirectional.
+            - Not everyone is a commenter.
+            - Also in case of a server crash, thundering herd problem to re-establish all connections.
+        - SSE
+            - uni dir
+            - Browser has built in support to re establish connection
+            - Its just like a long running HTTP req
+            - Doesn't require anything fancy.
+            - SOme API gateway also doesnt support SSE well, little tweaks reqreuired to make sure API doesnt close this
+              by default
+    - Redis pub/sub between comment service and messaging service which maintains SSE connections
+        - But limitation here is redis is fire and forget, so old messages cannot be retrieved/replayed.
+        - In such scenario, need to rely on DB call.
+        - Pagination -> cursor better than offset as no need to count previous rows.
+        - kafka vs redis needs to be explained. Kafka is not suitable here because lot of overhead for subscribe and
+          unsubscribe.
+        - redis pub sub makes it easier and faster, no durability though.
+
+-
 - I know at this point, we have to BOE, its my pref I forego them for now and come back if it influence my design.
 
 ## Ad click aggregator
+
 - Clarifications
-  - ads are displayed in websites
-  - SDK for clients
-  - ads are created and managed.
-  - Real time / near real time? -> 1 mins
+    - ads are displayed in websites
+    - SDK for clients
+    - ads are created and managed.
+    - Real time / near real time? -> 1 mins
 - Use case
-  - Aggregate ads
-  - Analytics on aggregated data
-    - Query dimenstions: time, ad, region and domain
-  - Out of scope 
-    - Ad target?
-    - Managing ads
+    - Aggregate ads
+    - Analytics on aggregated data
+        - Query dimenstions: time, ad, region and domain
+    - Out of scope
+        - Ad target?
+        - Managing ads
 - BOE
-  - Number of ads -> 1M (10^6)
-  - Clicks per day -> 1B ( 10^9)
-  - read ~ write ( optimize read and write separately )
-  - TPS -> (10^9)/(10^5) -> 10^4 
-    - Burst 10^5
+    - Number of ads -> 1M (10^6)
+    - Clicks per day -> 1B ( 10^9)
+    - read ~ write ( optimize read and write separately )
+    - TPS -> (10^9)/(10^5) -> 10^4
+        - Burst 10^5
 - API
-  - POST /v1/click
-   - ad_id, timestamp, user, location
-  - GET /v1/analytics?...
+    - POST /v1/click
+    - ad_id, timestamp, user, location
+    - GET /v1/analytics?...
 - NFR
-  - Liteness & Low latency ( Application shouldn't feel the load to write ads )
-  - Scalability
-  - Accuracy -> no double events or duplicate consumption ( in client and server)
-- 
+    - Liteness & Low latency ( Application shouldn't feel the load to write ads )
+    - Scalability
+    - Accuracy -> no double events or duplicate consumption ( in client and server)
+- HLD
+    - Cassandra and olap(clickhouse and druid) for read and write.
+- Deep dives
+    - Kafka + stream aggregator like Flink/Spark
+    - Flink -> maintains in mem DS and specify aggregate window and write roll up data to OLAP
+        - Flink flush interval -> if 10 sec, every 10sec
+        - Flush intervals help you to prepare data for graph granular time slots.
+    - What happens in new ad? Hot shards / hot partitions -> how to avoid?
+        - celebrity problem -> add 0-n to partition key
+    - Fault tolerance -> What if consumer flink jobs is down?
+        - Retention policies needs to be in place.
+    - Dump events to S3 for periodic reconciliation
+        - consume and process it to fix potentially incorrect records.
+
+## Leetcode
+
+- Check excalidraw
+- Feedback
+    - HLD
+        - No need to decouple all services in the first go.
+    - Time complexity for sorted set is O(n)
+    - api
+        - Missed get problems
+        - view problem
+            - missed api filters
+        - path param /problem/:problemId
+    - Deep dive
+        - what is written to DB but failed to write to redis? -> CDC
+        - No of containers less -> introduce queue
+        - Now we made submission async -> how he knows the result ?
+        - Worker can consume and run code on containers and pass it to primary service
+            - Can it directly write ot DB?
+              ![img_2.png](img_2.png)
+
+## Whatsapp
+
+- Usual FR & NFR
+- Talk about storage
+- Encryption OOS
+- Deep Dives
+    - Websocket management
+        - Use Layer 4 LB, in L7(http level because webs servers are stateless) connection is terminated after call.
+          Client to LB 1 connection and LB to chat server symmetric connection
+    - Routing messages to chat server and finding chat server that holds connection to the recipient is hard.
+        - ![img_4.png](img_4.png)
+        - During scaling event, consistent hashing occasional re-mapping might happen during scale up/down, at that
+          time, messages has to be retried twice.
+        - REDIS pub sub to decouple communication between chat servers.
+            - Kafka is not a right choice as topics are heavy and it's not built for spinning up millions of topics
+              dynamically.
+            - REDIS pub/sub gives at most once guarantee(which is low guarantee, but we have message stored in DB, as
+              long as we have a reliable way to deliver missed messages, its good).
+            - Client can periodically poll DB for missed messages and redis provides low latency.
+            - Multiple redis cluster to maintain connections
+        - Cleanup -> unread messages after 30 days
+            - Periodically clear read messages
+        - Device ID -> messages should be delivered in multiple devices.
+    - DB design
+    - Fan-out  
+      ![img_5.png](img_5.png)
 
 
+## Instagram
+-
+- Deep dives
+  - Fan-out
+    - Fanout-on-write for the majority of users (follower count < 100,000)
+      Fanout-on-read for the few "celebrity" users (follower count > 100,000)
+  - Render photos and videos instantly ( large files )
+  - 
+![img_6.png](img_6.png)
+![img_7.png](img_7.png)
 
 
 
@@ -365,7 +439,7 @@
     - Stateless consumers
     - Time based aggregation
         - Aggregation windows
-            - Tumbling windows - Fixed length and fixed start time, non overlappting i.e start of every minute.
+            - Tumbling windows - Fixed length and fixed start time, non overlapping i.e start of every minute.
             - Hopping window - 0-5, 1-6, 2-7 etc, overlaps.
             - Sliding window - Maintain LL to find for any range
     - Logs can be moved to S3
