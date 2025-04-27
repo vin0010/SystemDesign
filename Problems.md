@@ -48,8 +48,8 @@
 | Yelp                    |   ❌    |      ❌       |         ❌         |
 | Strava                  |   ❌    |      ❌       |         ❌         |
 | FB Live Comments        |   ✅    |      ✅       |         ❌         |
-| FB Post Search          |   ❌    |      ❌       |         ❌         |
-| Instagram               |   ❌    |      ❌       |         ❌         |
+| FB Post Search          |   ✅    |      ❌       |         ❌         |
+| Instagram               |   ✅    |      ❌       |         ❌         |
 | YouTube Top K           |   ❌    |      ❌       |         ❌         |
 | Uber                    |   ✅    |              |                   |
 | Robinhood               |   ❌    |      ❌       |         ❌         |
@@ -416,17 +416,39 @@
     - Fan-out  
       ![img_5.png](img_5.png)
 
-
 ## Instagram
--
+- Fanout + Dropbox
 - Deep dives
   - Fan-out
     - Fanout-on-write for the majority of users (follower count < 100,000)
       Fanout-on-read for the few "celebrity" users (follower count > 100,000)
   - Render photos and videos instantly ( large files )
-  - 
+  
 ![img_6.png](img_6.png)
 ![img_7.png](img_7.png)
+
+## Youtube Top K
+- 
+
+## Tinder
+- User can create preferences ( location, age, gender, etc.)
+- View stack of potential matches based on pref.
+- swipe left/right 
+- 2 users swipe right -> send notification
+- constraint 
+  - Avoid showing repeat profiles
+- oos
+  - create profile
+- NFR
+  - Consistency 
+  - 
+
+## FB post search
+- 
+
+
+
+
 
 
 
